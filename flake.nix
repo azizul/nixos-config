@@ -206,9 +206,10 @@
                       eval `keychain --eval --agents ssh id_ed25519`
                     '';
                 };
-              }
+              };
             };
           }
+          
           ./machines/lenovo-e590/configuration.nix # reload the nixos level config
         ];
       };
