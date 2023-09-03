@@ -85,9 +85,13 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  # set zsh as default since home-manager can't
+  programs.zsh.enable = true;
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
@@ -106,9 +110,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # set zsh as default since home-manager can't
-  programs.zsh.enable = true;
-  users.users.${username}.shell = pkgs.zsh;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
