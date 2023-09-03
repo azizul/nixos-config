@@ -3,7 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 #{ config, pkgs, ... }:
-{ username, fullname, email, nixos-version
+{ username, fullname, email, nixos-version,
   config, pkgs, ... }:
 
 {
