@@ -27,6 +27,7 @@
       email = "azizul.rahman.azizan@gmail.com";
       editor = "vim";
       browser = "vieb";
+      nixos-version = "23.05";
     in {
       # attribute lenovo-E590 machine system
       lenovoE590 = nixpkgs.lib.nixosSystem rec {
@@ -66,7 +67,7 @@
                 # You should not change this value, even if you update Home Manager. If you do
                 # want to update the value, then make sure to first check the Home Manager
                 # release notes.
-                home.stateVersion = "23.05"; # Please read the comment before changing.
+                home.stateVersion = "${nixos-version}"; # Please read the comment before changing.
 
                 # overlays
                 services.emacs.package = pkgs.emacs-unstable;

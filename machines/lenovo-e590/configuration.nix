@@ -2,12 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+#{ config, pkgs, ... }:
+{ username, fullname, email, nixos-version
+  config, pkgs, ... }:
 
 {
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.trusted-users = ["root" "zizu"];
+  nix.settings.trusted-users = ["root" "${username}"];
 
   imports =
     [ # Include the results of the hardware scan.
@@ -18,7 +20,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "ara.main.nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -84,9 +86,9 @@
   services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.zizu = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "zizu";
+    description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       # placed in home manager config
@@ -95,7 +97,7 @@
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "zizu";
+  services.xserver.displayManager.autoLogin.user = "${username}";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
@@ -106,7 +108,7 @@
 
   # set zsh as default since home-manager can't
   programs.zsh.enable = true;
-  users.users.zizu.shell = pkgs.zsh;
+  users.users.${username}.shell = pkgs.zsh;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -141,6 +143,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "${nixos-version}"; # Did you read the comment?
 
 }
