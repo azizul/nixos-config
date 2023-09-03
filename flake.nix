@@ -28,6 +28,8 @@
       editor = "vim";
       browser = "vieb";
       nixos-version = "23.05";
+      pkgs = pkgs;
+      config = config;
     in {
       # attribute lenovo-E590 machine system
       lenovoE590 = nixpkgs.lib.nixosSystem rec {
