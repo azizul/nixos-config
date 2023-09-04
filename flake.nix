@@ -72,12 +72,12 @@
                 home.stateVersion = "${nixos-version}"; # Please read the comment before changing.
 
                 # overlays
-                services.emacs.package = pkgs.emacs-unstable;
-                nixpkgs.overlays = [
-                  (import (builtins.fetchTarball {
-                    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-                  }))
-                ];
+                #services.emacs.package = pkgs.emacs-unstable;
+                #nixpkgs.overlays = [
+                #  (import (builtins.fetchTarball {
+                #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+                #  }))
+                #];
 
                 # The home.packages option allows you to install Nix packages into your
                 # environment.
@@ -116,7 +116,8 @@
                   pkgs.neovim
                   pkgs.helix
                   pkgs.vscode
-                  pkgs.emacs-unstable
+                  #pkgs.emacs-unstable #used with overlay
+                  pkgs.emacs29
 
                   # programming language
                   pkgs.sqlite
