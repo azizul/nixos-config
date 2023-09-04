@@ -20,11 +20,11 @@
 
   # overlays
   services.emacs.package = pkgs.emacs-unstable;
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
+  #nixpkgs.overlays = [
+  #  (import (builtins.fetchTarball {
+  #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+  #  }))
+  #];
 
 
   # The home.packages option allows you to install Nix packages into your
@@ -64,7 +64,8 @@
     pkgs.neovim
     pkgs.helix
     pkgs.vscode
-    pkgs.emacs-unstable
+    #pkgs.emacs-unstable
+    pkgs.emacs29
 
     # programming language
     pkgs.sqlite
