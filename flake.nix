@@ -41,6 +41,7 @@
           inherit system;
           inherit username fullname email;
           inherit editor browser;
+          inherit nixos-version;
         };
 
         modules = [
