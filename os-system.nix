@@ -7,6 +7,8 @@
 
   username,
   fullname,
+  nixos-version,
+  
   ...
 }:
 
@@ -132,11 +134,14 @@
     
   ];
 
+ # Enable steam
+  programs.steam.enable = true;
+ 
   ####################
   #### FONT     ######
   ####################
   fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-emoji
     noto-fonts-cjk
@@ -146,19 +151,15 @@
   ####################
   #### HYPRLAND ######
   ####################
-  programs.hyprland = {
-    enable = true;
-    xwayland = {
-      enable = true;
-      hidpi = true;
-    };
-  };
+  # default xwayland is enabled & xdg-desktop-portal-hyprland is portal app
+  programs.hyprland.enable = true;
+
 
   # Home manager options
   home-manager.users.${username} = {
     programs.waybar = {
       enable = true;
-      package = inputs.hyprland.packages.${system}.waybar-hyprland;
+#      package = inputs.hyprland.packages.${system}.waybar-hyprland;
     };
   };
   
@@ -234,4 +235,6 @@
     (self: super: {
     })
   ];
+
+  system.stateVersion = "${nixos-version}";
 }

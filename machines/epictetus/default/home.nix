@@ -19,12 +19,12 @@
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   # overlays
-  services.emacs.package = pkgs.emacs-unstable;
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
+  #services.emacs.package = pkgs.emacs-unstable;
+  #nixpkgs.overlays = [
+  #  (import (builtins.fetchTarball {
+  #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+  #  }))
+  #];
 
   # add insecure package
   nixpkgs.config.permittedInsecurePackages = [
@@ -70,7 +70,8 @@
     pkgs.neovim
     pkgs.helix
     #pkgs.vscode
-    pkgs.emacs-unstable
+    #pkgs.emacs-unstable
+    pkgs.emacs29
 
     # programming language
     pkgs.sqlite
@@ -102,7 +103,7 @@
     pkgs.audacious
 
     # iso tools
-    pkgs.etcher # require insecure electron package
+    #pkgs.etcher # require insecure electron package
     pkgs.ventoy
     #pkgs.unetbootin # missing gtk org.gtk.Settings.FileChooser
 

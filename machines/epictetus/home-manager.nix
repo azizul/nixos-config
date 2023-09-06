@@ -145,9 +145,6 @@
     QT_QPA_PLATFORMTHEME = lib.mkForce "qt5ct";
   };
 
-  # Enable steam
-  programs.steam.enable = true;
-  
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
