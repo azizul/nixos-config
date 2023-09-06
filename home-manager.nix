@@ -9,7 +9,7 @@
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "${nixos-version}"; # must follow nixos
 
-   home.packages = [
+  home.packages = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -24,64 +24,65 @@
     # '')
 
     # shell
-    pkgs.thefuck
-    pkgs.keychain
-    pkgs.rmlint
-    pkgs.rsync
-    pkgs.ncdu
-    pkgs.btop
-    pkgs.rlwrap
-    pkgs.tree
-    pkgs.tmux
-    pkgs.kitty
+    dconf
+    thefuck
+    keychain
+    rmlint
+    rsync
+    ncdu
+    btop
+    rlwrap
+    tree
+    tmux
+    kitty
 
     # git TUI
-    pkgs.lazygit
+    lazygit
 
     # editor
-    pkgs.neovim
-    pkgs.helix
-    #pkgs.vscode
-    #pkgs.emacs-unstable
-    pkgs.emacs29
+    neovim
+    helix
+    #vscode
+    #emacs-unstable
+    emacs29
 
     # programming language
-    pkgs.sqlite
-    pkgs.python3
-    pkgs.sbcl
-    pkgs.zig
-    pkgs.zls
-    pkgs.rustup
-    pkgs.llvm
-    pkgs.openjdk
-    pkgs.maven
-    pkgs.gradle
+    sqlite
+    python3
+    sbcl
+    zig
+    zls
+    rustup
+    llvm
+    openjdk
+    maven
+    gradle
 
     # web browsing
-    pkgs.firefox
-    pkgs.vieb
-    pkgs.nyxt
-    pkgs.qutebrowser
+    firefox
+    vieb
+    nyxt
+    qutebrowser
     
     # creative tools
-    pkgs.gimp
-    pkgs.krita
-    pkgs.musescore
-    pkgs.calibre
+    gimp
+    krita
+    musescore
+    calibre
 
     # video and audio
-    pkgs.pavucontrol
-    pkgs.vlc
-    pkgs.audacious
+    pavucontrol
+    vlc
+    audacious
 
     # iso tools
-    # pkgs.etcher   # single usb boot creator
-    pkgs.ventoy  # multiple usb boot iso
-    #pkgs.unetbootin # missing gtk org.gtk.Settings.FileChooser
+    # etcher   # single usb boot creator
+    ventoy  # multiple usb boot iso
+    #unetbootin # missing gtk org.gtk.Settings.FileChooser
 
     
     # games
-    #pkgs.steam # not working
+    steam
   ];
 
 
@@ -112,8 +113,15 @@
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "${editor}";
+    BROWSER = "${browser}";
+    NIXPKGS_ALLOW_UNFREE = "1";
+    QT_QPA_PLATFORM = "xcb";
+    QT_QPA_PLATFORMTHEME = lib.mkForce "qt5ct";
   };
 
+  # Enable steam
+  programs.steam.enable = true;
+  
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 

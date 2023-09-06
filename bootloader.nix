@@ -8,18 +8,14 @@
 }:
 
 {
+  # kernel
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  
   # Bootloader
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.loader.grub = {
-    enable = lib.mkForce true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
-  };
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "ntfs" ];
 
-  # Bootloader settings
-  boot.loader.efi = {
-    canTouchEfiVariables = true;
-    efiSysMountPoint = "/boot";
-  };
+  # Enable SysRQ
+  boot.kernel.sysctl."kernel.sysrq" = 1;
 }
