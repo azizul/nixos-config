@@ -12,11 +12,10 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      # use hyrland as desktop manager
-      ./../../os-system.nix
-      # note this is configured as developer, media and gaming home rig
-      ./../../home-manager.nix                 
-                                                
+      ./../../env-vars.nix # avoid the usual warning etc
+      ./../../os-system.nix # use hyrland as desktop manager
+      ./../../home-manager.nix # note this is configured as developer, media and gaming home rig
+      
     ];
 
   # hostname

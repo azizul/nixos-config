@@ -24,30 +24,53 @@
     # '')
 
     # shell
-    dconf
-    thefuck
-    keychain
-    rmlint
-    rsync
-    ncdu
-    btop
-    rlwrap
+    thefuck # correct your previous console command
+    keychain # keychain management tools
+    rmlint # remove duplicates and other lint
+    rsync # incremental file transfer utility
+    ncdu # disk usage analyzer with ncurses UI
+    btop # resource monitoring tool
+    rlwrap # readline wrapper for console program; i.e. SBCL
     tree
-    tmux
-    kitty
+    tmux # terminal multiplexer
+    kitty # openGL based terminal emulator
+    procps # tool to list proc files
+    killall
+    zip
+    unzip
+    shellcheck # shell script analysis tool
+    bat # cat clone with git integration
+    exa # ls replacement in rust
+    ydotool # generic command line automation tool
+    cava # console base audio visualization for alsa
+    neofetch # customize system info script 
+    cpufetch # fancy cpu architecture script
+    starship # customizable prompt for any shell
+    sox # simple rate audio converter
+    fzf # fuzzy finder written in Go
+    tldr # simplified man page
 
+    # file browser
+    mc # midnight commander
+    xfce.thunar # xfce file manager
+    
     # git TUI
-    lazygit
+    lazygit # simple TUI for git
 
     # editor
-    neovim
-    helix
+    neovim # vim fork
+    helix # postmodern text editor
     #vscode
     #emacs-unstable
     emacs29
 
     # programming language
-    sqlite
+    gcc # GNU compiler collection
+    glibc # GNU C library
+    lld # LLVM linker unwrapped
+    llvmPackages.bintools # system binary utilities
+    clang # C language frontend for LLVM
+    sqlite # SQL db engine
     python3
     sbcl
     zig
@@ -57,24 +80,27 @@
     openjdk
     maven
     gradle
+    go
 
-    # web browsing
+    # internet browsing
     firefox
     vieb
     nyxt
     qutebrowser
+    lagrange # gemini client
     
     # creative tools
-    gimp
+    gimp # GNU image manipulation program 
     krita
     musescore
     calibre
-
+    transmission-gtk # fast and easy bitorrent client
+    
     # video and audio
-    pavucontrol
-    vlc
     audacious
-
+    vlc # cross platform media player and streaming server
+    mpv # general purpose media player, fork of MPlayer and mplayer2
+    
     # iso tools
     # etcher   # single usb boot creator
     ventoy  # multiple usb boot iso
@@ -82,7 +108,7 @@
 
     
     # games
-    steam
+    steam # digitial distribution app
   ];
 
 

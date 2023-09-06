@@ -56,97 +56,76 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
+    # base
     vim
     wget
     git
-    lld
-    gcc
-    clang
-    udev
-    llvmPackages.bintools
-    procps
-    killall
-    zip
-    unzip
-    bluez
-    bluez-tools
-    brightnessctl
-    light
-    xdg-desktop-portal
-    xdg-utils
-    pipewire
-    wireplumber
-    alsaLib
-    pkgconfig
-    networkmanager
-    networkmanagerapplet
-    fzf
-    tldr
-    sox
-    yad
-    flatpak
-    gtk2
-    gtk3
-    gtk4
-    helix
-    brave
-    xfce.thunar
-    kitty
-    bat
-    exa
-    pavucontrol
-    blueman
-    ydotool
-    cava
-    neofetch
-    cpufetch
-    starship
-    lolcat
-    gimp
-    transmission-gtk
-    slurp
-    gparted
-    vlc
-    mpv
-    krabby
-    zellij
-    shellcheck
-    thefuck
-    gthumb
-    cmatrix
-    lagrange
-    steam
-    xorg.libX11
+    curl
+    udev # system & service manager
+    pkgconfig # tool to search other package info
+    yad # gui dialog tool for shell scripts
+
+    # System application distribution
+    flatpak # linux app sandboxing and distribution framework
+    
+    # System bluetooth
+    bluez  # bluetooth support for linux
+    bluez-tools # command-line manager for bluez
+    blueman # gtk based bluetooth manager
+    
+    # System audio
+    pipewire # server and API to handle multimedia pipelines
+    wireplumber # session/policy manager for pipewire
+    alsaLib # Advanced linux sound architecture ALSA library
+    pavucontrol # PulseAudio volume control
+    
+    # System network
+    networkmanager # network config & mgt tools
+    networkmanagerapplet # gnome control applet
+    
+    # System display and desktop
+    brightnessctl # control device brightness
+    light # tool to control background light
+    xdg-desktop-portal # desktop integration
+    xdg-utils # desktop integration task
+    slurp # select a region in a wayland compositor
+    gthumb # image browser and viewer for gnome
+    xorg.libX11 
     xorg.libXcursor
-    cinnamon.cinnamon-desktop
+    cinnamon.cinnamon-desktop # library and data for various cinnamon module
+    dconf # GDE configuration db
+    
+    # System disk
+    gparted # graphical disk partioning tool
+    
+    # GUI framework
+    gtk2 # multiplatform toolkit
+    gtk3 # multiplatform toolkit
+    gtk4 # multiplatform toolkit
+    qt5.qtwayland # cross platform framework for C++
+    qt6.qtwayland # cross platform framework for C++ 
+    qt6.qmake
+    libsForQt5.qt5.qtwayland 
+    qt5ct # QT 5 configuration tool
+    
+     # display manager
+    lightdm # cross desktop display manager
+    sddm # QML based X11 display manager
+    gnome.gdm # program that manages graphical display servers and user logins
 
-    # programming languge
-    cargo
-    rustc
-    rust-analyzer
-    go
-
-    # command shell
-    nushell
-
-    # display manager
-    lightdm
-    sddm
-    gnome.gdm
-
-    # hyprland
-    hyprland
-    xwayland
-    cliphist
-    alacritty
-    rofi-wayland
-    swww
-    swaynotificationcenter
-    lxde.lxsession
+    # Wayland & hyprland
+    hyprland # dynamic tilling wayland compositor
+    xwayland # X server for interfacing X11 apps and Wayland protocols
+    cliphist # wayland clipboard manager
+    rofi-wayland # windows switcher, run dialog and dmenu for Wayland
+    swww # animated wall paper daemon for wayland
+    swaynotificationcenter # notification daemon with GUI build for sway
+    lxde.lxsession # LXDE session manager
     inputs.hyprwm-contrib.packages.${system}.grimblast
-    gtklock
-    eww-wayland
-    xdg-desktop-portal-hyprland
+    gtklock # GTK based lock screen for Wayland
+    eww-wayland # Elkowar wacky widget
+    xdg-desktop-portal-hyprland # xdg desktop portal backend for Hyprland
     
   ];
 

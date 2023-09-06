@@ -14,7 +14,6 @@
 
 {
   environment.variables = {
-    STARSHIP_CONFIG = "/home/${username}/.config/starship/starship.toml";
     EDITOR = "${editor}";
     BROWSER = "${browser}";
     NIXPKGS_ALLOW_UNFREE = "1";
