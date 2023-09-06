@@ -20,12 +20,16 @@
 
   # overlays
   services.emacs.package = pkgs.emacs-unstable;
-  #nixpkgs.overlays = [
-  #  (import (builtins.fetchTarball {
-  #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-  #  }))
-  #];
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
 
+  # add insecure package
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-12.2.3" #for etcher
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -56,6 +60,8 @@
     pkgs.btop
     pkgs.rlwrap
     pkgs.tree
+    pkgs.tmux
+    pkgs.kitty
 
     # git TUI
     pkgs.lazygit
@@ -63,9 +69,8 @@
     # editor
     pkgs.neovim
     pkgs.helix
-    pkgs.vscode
-    #pkgs.emacs-unstable
-    pkgs.emacs29
+    #pkgs.vscode
+    pkgs.emacs-unstable
 
     # programming language
     pkgs.sqlite
@@ -82,6 +87,9 @@
     # web browsing
     pkgs.firefox
     pkgs.vieb
+    pkgs.nyxt
+    pkgs.qutebrowser
+
     # creative tools
     pkgs.gimp
     pkgs.krita
@@ -92,6 +100,14 @@
     pkgs.pavucontrol
     pkgs.vlc
     pkgs.audacious
+
+    # iso tools
+    pkgs.etcher # require insecure electron package
+    pkgs.ventoy
+    #pkgs.unetbootin # missing gtk org.gtk.Settings.FileChooser
+
+    # games
+    #pkgs.steam # not working
   ];
 
 

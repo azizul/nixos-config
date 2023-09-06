@@ -2,14 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-#{ config, pkgs, ... }:
-{ username, fullname, email, nixos-version,
-  config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.trusted-users = ["root" "${username}"];
+  nix.settings.trusted-users = ["root" "zizu"];
 
   imports =
     [ # Include the results of the hardware scan.
@@ -20,7 +18,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-e590"; # Define your hostname.
+  # add ntfs fs support
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -85,14 +86,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
-  # set zsh as default since home-manager can't
-  programs.zsh.enable = true;
-  
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${username} = {
+  users.users.zizu = {
     isNormalUser = true;
-    shell = pkgs.zsh;
-    description = "${username}";
+    description = "zizu";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       # placed in home manager config
@@ -101,7 +98,7 @@
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "${username}";
+  services.xserver.displayManager.autoLogin.user = "zizu";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
@@ -110,6 +107,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # set zsh as default since home-manager can't
+  programs.zsh.enable = true;
+  users.users.zizu.shell = pkgs.zsh;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -144,6 +144,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "${nixos-version}"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 
 }

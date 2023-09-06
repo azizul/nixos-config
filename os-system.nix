@@ -15,6 +15,7 @@
     ./gtk.nix
     ./nix.nix
     ./bootloader.nix
+    ./env-vars.nix
   ];
 
   # Enable networking
@@ -68,6 +69,8 @@
 
     # System application distribution
     flatpak # linux app sandboxing and distribution framework
+    appimage-run
+    appimagekit
     
     # System bluetooth
     bluez  # bluetooth support for linux
@@ -171,10 +174,10 @@
       cinnamon.enable = true;
     };
     displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "${username}";
-      };
+     # autoLogin = {
+     #   enable = true;
+     #   user = "${username}";
+     # };
       gdm = {
         enable = true;
       };

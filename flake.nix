@@ -30,8 +30,32 @@
       nixos-version = "23.05";
       
     in {
-      # attribute lenovo-E590 machine system
-      lenovoE590 = nixpkgs.lib.nixosSystem rec {
+      # default according to working system with gdm and gde
+      epictetus-default = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+
+        specialArgs = {
+          inherit (nixpkgs) lib;
+          inherit inputs nixpkgs;
+          inherit system;
+        };
+
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.zizu = import ./machines/epictetus/default/home.nix;
+            };
+          }
+          
+          ./machines/epictetus/default/configuration.nix
+        ];
+      };
+
+      # configured to have gdm with cinnamon and hyprland session
+      epictetus = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 
         specialArgs = {
@@ -53,12 +77,15 @@
               extraSpecialArgs = {
                 inherit username fullname email editor browser nixos-version;
               };
-              users.${username} = import ./home-manager.nix;
+              users.${username} = import ./machines/epictetus/home-manager.nix;
             };
           }
-          ./machines/lenovo-e590/config.nix # reload the nixos level config
+          
+          ./machines/epictetus/config.nix
         ];
       };
+      
+      
     };
   };
 }
