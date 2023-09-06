@@ -28,6 +28,7 @@
       editor = "vim";
       browser = "vieb";
       nixos-version = "23.05";
+      
     in {
       # attribute lenovo-E590 machine system
       lenovoE590 = nixpkgs.lib.nixosSystem rec {
@@ -37,7 +38,8 @@
           inherit (nixpkgs) lib;
           inherit inputs nixpkgs;
           inherit system;
-          inherit username fullname email;
+          inherit username;
+          inherit fullname email;
           inherit editor browser;
           inherit nixos-version;
         };
@@ -45,14 +47,16 @@
         modules = [
           inputs.home-manager.nixosModules.home-manager
           {
-            
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.${username} = ./machines/lenovo-e590/home.nix;
+              extraSpecialArgs = {
+                inherit username fullname email editor browser nixos-version;
+              };
+              users.${username} = import ./home-manager.nix;
             };
           }
-          ./machines/lenovo-e590/configuration.nix # reload the nixos level config
+          ./machines/lenovo-e590/config.nix # reload the nixos level config
         ];
       };
     };
