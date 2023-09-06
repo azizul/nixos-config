@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo nixos-rebuild switch --flake ".#lenovoE590"
+sudo nixos-rebuild switch -v --flake ".#lenovoE590"
