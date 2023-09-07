@@ -10,13 +10,13 @@
   home.stateVersion = "${nixos-version}"; # must follow nixos
 
   #overlays
-  services.emacs.package = pkgs.emacs-unstable;
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-      sha256 = "0lzks54qzqvfazany625nn2f8knlm0sd25j0i2jh3g0y60srrcij";
-    }))
-  ];
+  #services.emacs.package = pkgs.emacs-unstable;
+  #nixpkgs.overlays = [
+  #  (import (builtins.fetchTarball {
+  #    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+  #    sha256 = "0lzks54qzqvfazany625nn2f8knlm0sd25j0i2jh3g0y60srrcij";
+  #  }))
+  #];
   
 
   
@@ -72,8 +72,8 @@
     neovim # vim fork
     helix # postmodern text editor
     #vscode
-    emacs-unstable
-    #emacs29
+    #emacs-unstable
+    emacs29
 
     # programming language
     gcc # GNU compiler collection
