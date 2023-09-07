@@ -9,6 +9,17 @@
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "${nixos-version}"; # must follow nixos
 
+  #overlays
+  services.emacs.package = pkgs.emacs-unstable;
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+      sha256 = 0000000000000000000000000000000000000000000000000000;
+    }))
+  ];
+  
+
+  
   home.packages = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
