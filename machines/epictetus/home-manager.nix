@@ -17,15 +17,23 @@
   #    sha256 = "0lzks54qzqvfazany625nn2f8knlm0sd25j0i2jh3g0y60srrcij";
   #  }))
   #];
-  
 
+  # enable font management
+  fonts.fontconfig.enable = true; 
   
   home.packages = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    # fonts?
+    (nerdfonts.override { fonts = ["JetBrainsMono" "FantasqueSansMono" "FiraCode" "DroidSansMono" "Iosevka" ]; })
+    comfortaa
+    inter
+    dotcolon-fonts 
+    source-code-pro
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
