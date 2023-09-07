@@ -116,23 +116,7 @@
     qt5ct # QT 5 configuration tool
     
      # display manager
-    lightdm # cross desktop display manager
-    sddm # QML based X11 display manager
-    gnome.gdm # program that manages graphical display servers and user logins
-
-    # Wayland & hyprland
-    hyprland # dynamic tilling wayland compositor
-    xwayland # X server for interfacing X11 apps and Wayland protocols
-    cliphist # wayland clipboard manager
-    rofi-wayland # windows switcher, run dialog and dmenu for Wayland
-    swww # animated wall paper daemon for wayland
-    swaynotificationcenter # notification daemon with GUI build for sway
-    lxde.lxsession # LXDE session manager
-    inputs.hyprwm-contrib.packages.${system}.grimblast
-    gtklock # GTK based lock screen for Wayland
-    eww-wayland # Elkowar wacky widget
-    xdg-desktop-portal-hyprland # xdg desktop portal backend for Hyprland
-    
+     # see xserver services
   ];
 
  # Enable steam
@@ -153,16 +137,7 @@
   #### HYPRLAND ######
   ####################
   # default xwayland is enabled & xdg-desktop-portal-hyprland is portal app
-  programs.hyprland.enable = true;
-
-
-  # Home manager options
-  home-manager.users.${username} = {
-    programs.waybar = {
-      enable = true;
-#      package = inputs.hyprland.packages.${system}.waybar-hyprland;
-    };
-  };
+  # programs.hyprland.enable = true;
   
   ####################
   #### X-SERVER ######
