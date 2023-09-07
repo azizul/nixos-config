@@ -95,6 +95,7 @@
     maven
     gradle
     go
+    clojure
 
     # internet browsing
     firefox
@@ -120,6 +121,9 @@
     ventoy  # multiple usb boot iso
     #unetbootin # missing gtk org.gtk.Settings.FileChooser
 
+    # virtualization & iso
+    podman
+    virt-manager
     
     # games
     steam # digitial distribution app
