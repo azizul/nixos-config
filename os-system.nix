@@ -46,7 +46,7 @@
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
-    initialPassword = ${username};
+    initialPassword = "${username}";
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "${username}";
