@@ -78,9 +78,12 @@
     # programming language
     gcc # GNU compiler collection
     glibc # GNU C library
-    lld # LLVM linker unwrapped
-    llvmPackages.bintools # system binary utilities
-    clang # C language frontend for LLVM
+    # FIXME clash with gcc ld
+    #lld # LLVM linker unwrapped
+    # FIXME clash with gcc ranlib
+    #llvmPackages.bintools # system binary utilities
+    # FIXME clash with gcc ld 
+    #clang # C language frontend for LLVM
     sqlite # SQL db engine
     python3
     sbcl
