@@ -115,6 +115,10 @@
     audacious
     vlc # cross platform media player and streaming server
     mpv # general purpose media player, fork of MPlayer and mplayer2
+
+    # music tools
+    sunvox
+    ardour
     
     # iso tools
     # etcher   # single usb boot creator
@@ -126,6 +130,7 @@
     virt-manager
     
     # games
+    retroarch
     steam # digitial distribution app
   ];
 
