@@ -121,6 +121,7 @@
     gnome.gdm # program that manages graphical display servers and user logins
 
     # Wayland & hyprland
+    wev # event viewer for binding keys
     hyprland # dynamic tilling wayland compositor
     xwayland # X server for interfacing X11 apps and Wayland protocols
     cliphist # wayland clipboard manager
