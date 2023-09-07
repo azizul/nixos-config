@@ -72,8 +72,8 @@
     neovim # vim fork
     helix # postmodern text editor
     #vscode
-    #emacs-unstable
-    emacs29
+    emacs-unstable
+    #emacs29
 
     # programming language
     gcc # GNU compiler collection
