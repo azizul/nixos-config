@@ -156,6 +156,12 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    # link source file of application
+    xdg.configFile."hypr/hyprland.conf".source = ./xdg-config/hypr/hyprland.conf;
+    xdg.configFile."waybar".source = ./xdg-config/waybar;
+    xdg.configFile."helix/config.toml".source = ./xdg-config/helix/config.toml;
+    xdg.configFile."mc".source = ./xdg-config/mc;
   };
 
   # You can also manage environment variables but you will have to manually
@@ -179,6 +185,15 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  ########################
+  #### PROGRAMS CONFIG ###
+  ########################
+
+  # hyprland enabled here and its config file use symlinked home.file
+  programs.hyprland = {
+    enable = true;
+  };
+  
   # enable git and set the configuration
   programs.git = {
     enable = true;
@@ -191,7 +206,7 @@
     enable = true;
     shellAliases = {
       ll = "ls -l";
-      os-update = "sudo nixos-rebuild switch";
+      #os-update = "sudo nixos-rebuild switch";
       #os-config = "sudo vim /etc/nixos/configuration.nix";
       #hm-update = "home-manager switch";
       #hm-config = "vim ~/.config/home-manager/home.nix";
