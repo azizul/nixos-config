@@ -143,7 +143,7 @@
   #### FONT     ######
   ####################
   fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-emoji
     noto-fonts-cjk
