@@ -190,7 +190,7 @@
   ########################
 
   # hyprland enabled here and its config file use symlinked home.file
-  programs.hyprland = {
+  wayland.windowManager.hyprland = {
     enable = true;
   };
   
