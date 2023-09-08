@@ -156,12 +156,23 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
 
+  # similar to home file, but this is placed inside ~/.config folder
+  xdg.configFile = {
     # link source file of application
-    xdg.configFile."hypr/hyprland.conf".source = ./xdg-config/hypr/hyprland.conf;
-    xdg.configFile."waybar".source = ./xdg-config/waybar;
-    xdg.configFile."helix/config.toml".source = ./xdg-config/helix/config.toml;
-    xdg.configFile."mc".source = ./xdg-config/mc;
+    "hypr/hyprland.conf".source = ./xdg-config/hypr/hyprland.conf;
+    "waybar" = {
+      recursive = true;
+      enable = true;
+      source = ./xdg-config/waybar;
+    };
+    "helix/config.toml".source = ./xdg-config/helix/config.toml;
+    "mc" = {
+      recursive = true;
+      enable = true;
+      source = ./xdg-config/mc;
+    };
   };
 
   # You can also manage environment variables but you will have to manually
@@ -188,11 +199,6 @@
   ########################
   #### PROGRAMS CONFIG ###
   ########################
-
-  # hyprland enabled here and its config file use symlinked home.file
-  wayland.windowManager.hyprland = {
-    enable = true;
-  };
   
   # enable git and set the configuration
   programs.git = {
