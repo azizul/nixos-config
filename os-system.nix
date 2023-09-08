@@ -238,5 +238,6 @@
     })
   ];
 
+  # FIXME not sure why unstable requires this
   system.stateVersion = "${nixos-version}";
 }

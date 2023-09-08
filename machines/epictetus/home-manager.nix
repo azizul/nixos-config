@@ -7,8 +7,8 @@
 
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
-  home.stateVersion = "${nixos-version}"; # must follow nixos
-
+  home.stateVersion = "${nixos-version}"; # FIXME not sure why this is required
+  
   #overlays
   #services.emacs.package = pkgs.emacs-unstable;
   #nixpkgs.overlays = [

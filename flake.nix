@@ -2,10 +2,12 @@
   description = "Ejon's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable branch
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable branch
     #nixpkgs.url = "github:nixos/nixpkgs"; # master/trunk DON"T USED THIS
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05"; # stable 23.05
-
+    #nixpkgs-unstable = "github:nixos/nixpkgs/nixos-unstable"
+    
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable branch
+    
     home-manager = {
       url = "github:nix-community/home-manager"; # master/trunk
       #url = "github:nix-community/home-manager/release-23.05"; # stable 23.05
@@ -31,7 +33,7 @@
       email = "azizul.rahman.azizan@gmail.com";
       editor = "vim";
       browser = "vieb";
-      nixos-version = "23.05";
+      nixos-version = "23.11"; # FIXME defined on input; fixed to follow rolling version is 23.11
       
     in {
       # default according to working system with gdm and gde
