@@ -68,7 +68,8 @@
     sox # simple rate audio converter
     fzf # fuzzy finder written in Go
     tldr # simplified man page
-
+    outils # checksums programs
+    
     # file browser
     mc # midnight commander
     xfce.thunar # xfce file manager
