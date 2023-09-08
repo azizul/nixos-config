@@ -2,10 +2,14 @@
   description = "Ejon's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # unstable branch
+    #nixpkgs.url = "github:nixos/nixpkgs"; # master/trunk DON"T USED THIS
+    #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05"; # stable 23.05
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager"; # master/trunk
+      #url = "github:nix-community/home-manager/release-23.05"; # stable 23.05
+      
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
