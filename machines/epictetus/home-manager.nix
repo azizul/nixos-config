@@ -69,6 +69,7 @@
     fzf # fuzzy finder written in Go
     tldr # simplified man page
     outils # checksums programs
+    gnupg # GNU pgp program
     
     # file browser
     mc # midnight commander
