@@ -184,6 +184,11 @@
       enable = true;
       source = ./xdg-config/emacs;
     };
+    "kitty" = {
+      recursive = true;
+      enable = true;
+      source = ./xdg-config/kitty;
+    };
   };
 
   # You can also manage environment variables but you will have to manually
