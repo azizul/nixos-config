@@ -72,8 +72,9 @@
     gnupg # GNU pgp program
     ripgrep # fuzzy finder for lazy.nvim
     fd # fuzzy finder for lazy.nvim
-    gnumake # linux make for emacs vterm build
-    cmake # cross-platform system generator for emacs vterm build
+    gnumake # linux make; for emacs vterm build
+    cmake # cross-platform system generator; for emacs vterm build
+    libtool # generic support script; for emacs vterm build 
     
     # file browser
     mc # midnight commander
