@@ -456,6 +456,15 @@ g#+author: Azizul Rahman Azizan
        (define-key 'ara-map (kbd "k R") 'avy-kill-ring-save-region))
    #+end_src
 
+** surround eqivalent *smart-parent*
+   #+begin_src emacs-lisp
+     ;; use smart-parens
+     (use-package smartparens
+       :config
+       (require 'smartparens-config)
+       (smartparens-global-mode))
+   #+end_src
+
 * Completion
   For the completion using fuzzy type of search, use the =C-h a= to find the matching methods and
   variable in the documentation of elisp interpreter. Note some of dependencies and dependent can
