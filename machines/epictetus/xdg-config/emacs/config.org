@@ -31,19 +31,19 @@ g#+author: Azizul Rahman Azizan
 * Elisp variable and function
 
 ** Keymaps
-   
+
    Offload the most used utility in this key map, we could remap this prefix to other if necassary
    when configuration are take by other package.
-   
+
    #+begin_src emacs-lisp
      ;; personal utility keymap
      (define-prefix-command 'ara-map)
      (global-set-key (kbd "C-c a") 'ara-map)
    #+end_src
-   
+
 ** functions
    Collection of functions useful for certain tasks
-   
+
 *** align all table [org-mode]
     Rather than going to each table and execute =C-c C-c= execute this function for current
     org-file.
@@ -52,10 +52,10 @@ g#+author: Azizul Rahman Azizan
 	(interactive)
 	(org-table-map-tables 'org-table-align 'quietly))
     #+end_src
-    
+
 * Package System Setup
 ** Advanced package with *straight*
-   
+
    For using package/plugin with more details controls, we can use *straight* package to download
    the source and build them (this seems to has error).  With git as prerequisite we can track the
    version which make the software stable or fix them if necassary. The following step summarizes
@@ -101,19 +101,19 @@ g#+author: Azizul Rahman Azizan
 
    Using the above library with =main.gmail= is registered in *pass* program
    #+begin_src sh :results output :tangle no
-     pass 
+     pass
    #+end_src
 
    #+RESULTS:
    : Password Store
    : └── main.gmail
-   
+
    #+begin_src emacs-lisp :tangle no
      (auth-source-pass-get 'secret "main.gmail")
    #+end_src
-   
+
 ** org-mode
-   
+
    Org-mode will download the repository version for the org-mode and compiled it; however this
    "main" trunk version is not allowed in any other of the additional packages especially *org-ref*
    #+begin_src emacs-lisp
@@ -146,7 +146,7 @@ g#+author: Azizul Rahman Azizan
      ;; allow to input the private key password
      (setf epg-pinentry-mode 'loopback)
    #+end_src
-   
+
 ** repeat-mode
 
    Allows repeat for certain commands such as window resizing and navigating
@@ -154,9 +154,9 @@ g#+author: Azizul Rahman Azizan
      ;; enable repeat mode
      (repeat-mode)
    #+end_src
-   
+
 ** COMMENT email (gnus)
-   
+
    A good example [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org][sample]] which includes better configuration in emacs init than the following
    example [[https://www.bounga.org/tips/2020/05/03/multiple-smtp-accounts-in-gnus-without-external-tools/][guide]] on multiple imap use in =gnus=
    #+begin_src emacs-lisp
@@ -276,7 +276,7 @@ g#+author: Azizul Rahman Azizan
        (gnus-topic-set-parameters "mail" '((display . 200)))
        (gnus-topic-set-parameters "mail draft" '((display . 200))))
    #+end_src
-   
+
 * Emacs configuration
 ** Remap default keybinding
 
@@ -302,7 +302,7 @@ g#+author: Azizul Rahman Azizan
 	   kept-old-versions 5)
      (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/backup/" t)))
    #+end_src
-  
+
 ** Basic UI Configuration
 
    This section configures basic UI settings that remove unneeded elements to make Emacs look a lot
@@ -363,7 +363,7 @@ g#+author: Azizul Rahman Azizan
      ;; auto binded to C-x g
      (use-package magit)
    #+end_src
-   
+
 ** Snippet Engine *yasnippet*
    Main snippet engine package
    #+BEGIN_SRC emacs-lisp
@@ -404,9 +404,9 @@ g#+author: Azizul Rahman Azizan
        (which-key-mode)
        (setq which-key-idle-delay 1))
    #+END_SRC
-   
+
 ** terminal emulator *vterm*
-   
+
    [[https://github.com/akermu/emacs-libvterm/][vterm]] is an improved terminal emulator package which uses a compiled native module to interact
    with the underlying terminal applications.  This enables it to be much faster than =term-mode=
    and to also provide a more complete terminal emulation experience.
@@ -455,12 +455,12 @@ g#+author: Azizul Rahman Azizan
        (define-key 'ara-map (kbd "k L") 'avy-kill-ring-save-whole-line)
        (define-key 'ara-map (kbd "k R") 'avy-kill-ring-save-region))
    #+end_src
-   
+
 * Completion
   For the completion using fuzzy type of search, use the =C-h a= to find the matching methods and
   variable in the documentation of elisp interpreter. Note some of dependencies and dependent can
   be found using *Straight* function such as =straight-dependent= or =straight-dependencies=.
-  
+
 ** narrowing list *vertico*
    ;; code and paste from the [[https://github.com/minad/vertico#configuration][url]]
    #+begin_src emacs-lisp
@@ -514,7 +514,7 @@ g#+author: Azizul Rahman Azizan
        ;; Enable recursive minibuffers
        (setq enable-recursive-minibuffers t))
    #+end_src
-   
+
 ** Code completion *company*
 
    Company actually improves the usage of =completion-at-point= function to be very polished (drop
@@ -527,7 +527,7 @@ g#+author: Azizul Rahman Azizan
        :config
        (global-company-mode))
    #+end_src
-   
+
 * Documents
 ** pdf *pdf-tools*
    After installation, need to run =(pdf-tools-install)= which will built the server it connects to.
@@ -685,7 +685,7 @@ g#+author: Azizul Rahman Azizan
 	 '("?" . meow-cheatsheet))
 	(ara/meow-normal-define-key))
     #+end_src
-    
+
 ** load *meow* bindings
    #+begin_src emacs-lisp
      ;; configure meow with local setup binding
@@ -705,7 +705,7 @@ g#+author: Azizul Rahman Azizan
      (use-package project
        :straight (:type built-in ))
    #+end_src
-   
+
 ** Eglot
 
    Used the build-in eglot library; note the eglot has it's own default programs configured
@@ -713,10 +713,10 @@ g#+author: Azizul Rahman Azizan
      (use-package eglot
        :straight (:type built-in))
    #+end_src
-   
+
 ** Language
 *** Clojure
-    
+
     For steps is to include the major mode editing for clojure files; this is is using [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]
     #+begin_src emacs-lisp
       ;; major mode for clojure editing
@@ -734,7 +734,7 @@ g#+author: Azizul Rahman Azizan
 
     #+begin_src emacs-lisp
 
-      ;; programming typescript with lsp 
+      ;; programming typescript with lsp
       (use-package typescript-mode
 	:mode "\\.ts\\'"
 	:config
@@ -780,7 +780,7 @@ g#+author: Azizul Rahman Azizan
     we can build the lsp server made from Zig =zls= and using the integration with =lsp-mode=
     package.
     - zls :: Get the source code and build it using git; see [[https://github.com/zigtools/zls][link]]
-    - zig-mode :: Zig major mode for syntax highlighting 
+    - zig-mode :: Zig major mode for syntax highlighting
       #+begin_src emacs-lisp
 	;; install main mode with lsp integrated with zls
 	(use-package zig-mode)
@@ -789,9 +789,9 @@ g#+author: Azizul Rahman Azizan
 *** C and C++
 
     *eglot* has some default configuration; seems to work fast enough
-    
+
 *** Rust
-    
+
     Depends on the tree-sitter for syntax highlighting and LSP for advanced options
     #+begin_src emacs-lisp
       ;; add rust + lsp
@@ -801,13 +801,13 @@ g#+author: Azizul Rahman Azizan
 	:config
 	(setq rust-format-on-save t))
     #+end_src
-    
+
 *** Common Lisp
 **** SLY
 
      SLIME forked should work better with auto completion; Similar to SLIME this is independent of LSP and DAP.
      Refer to the following [[https://github.com/joaotavora/sly][link]] for the modification and manual (similar to SLIME but with additional features).
-     #+begin_src emacs-lisp 
+     #+begin_src emacs-lisp
        ;; SLIME forked version sly with sbcl dialect
        (use-package sly
 	 :config
@@ -913,7 +913,7 @@ g#+author: Azizul Rahman Azizan
       (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
       (require 'erlang-start)
     #+end_src
-    
+
 *** COMMENT Elixir
     Once setup has bee done to update the latest =apt= repository from =Erlang Solutions=, we can
     install elixir via following command.
@@ -936,5 +936,3 @@ g#+author: Azizul Rahman Azizan
 	  :init
 	  (add-to-list 'exec-path "~/apps/elixir-ls/release"))
       #+end_src
-      
-
