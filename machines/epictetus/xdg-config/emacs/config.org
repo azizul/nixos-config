@@ -447,7 +447,7 @@ g#+author: Azizul Rahman Azizan
        ;; less frequently used
        (define-key 'ara-map (kbd "g l") 'avy-goto-line)
        (define-key 'ara-map (kbd "g w") 'avy-goto-word-0)
-       (define-key 'ara-map (kbd "g c") 'avy-goo-char)
+       (define-key 'ara-map (kbd "g c") 'avy-goto-char)
        (define-key 'ara-map (kbd "c l") 'avy-copy-line)
        (define-key 'ara-map (kbd "c r") 'avy-copy-region)
        (define-key 'ara-map (kbd "k l") 'avy-kill-whole-line)

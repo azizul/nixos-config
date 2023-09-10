@@ -1,0 +1,11 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("01-non-important"
+ (filename . "/media/debian-home/zizu/Documents/01-non-important/")
+ (front-context-string . "..\n  drwxrwxr-x ")
+ (rear-context-string . "6 Sep   6 10:34 ")
+ (position . 149)
+ (last-modified 25853 7517 240100 569000))
+)
