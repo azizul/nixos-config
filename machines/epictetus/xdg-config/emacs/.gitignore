@@ -1,0 +1,23 @@
+#exclude emacs package folder
+.extension/
+auto-save-list/
+elpa/
+transient/
+var/
+etc/
+straight/
+.last-package-update-day
+eshell/
+eln-cache/
+tree-sitter/
+url/
+network-security.data
+history
+init.el
+viper
+projects
+*~
+.#*
+*.eld
+*_archive
+session*

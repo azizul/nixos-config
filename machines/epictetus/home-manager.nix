@@ -70,6 +70,8 @@
     tldr # simplified man page
     outils # checksums programs
     gnupg # GNU pgp program
+    ripgrep # fuzzy finder
+    fd # fuzzy finder
     
     # file browser
     mc # midnight commander
@@ -83,6 +85,7 @@
     helix # postmodern text editor
     #vscode
     #emacs-unstable
+    cmake # building vterm in emacs
     emacs29
 
     # programming language
@@ -174,6 +177,11 @@
       recursive = true;
       enable = true;
       source = ./xdg-config/mc;
+    };
+    "emacs" = {
+      recursive = true;
+      enable = true;
+      source = ./xdg-config/emacs;
     };
   };
 
