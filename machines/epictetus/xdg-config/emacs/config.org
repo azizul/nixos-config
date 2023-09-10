@@ -536,7 +536,7 @@ g#+author: Azizul Rahman Azizan
      ;; viewing pdf
      (use-package pdf-tools)
    #+end_src
-* Modal key binding *evil*
+* COMMENT Modal key binding *evil*
 
   Using selection based know seem more tedious; trying out evil-mode with less configuration.
   Too much modification on the software sides
