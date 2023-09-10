@@ -70,8 +70,10 @@
     tldr # simplified man page
     outils # checksums programs
     gnupg # GNU pgp program
-    ripgrep # fuzzy finder
-    fd # fuzzy finder
+    ripgrep # fuzzy finder for lazy.nvim
+    fd # fuzzy finder for lazy.nvim
+    gnumake # linux make for emacs vterm build
+    cmake # cross-platform system generator for emacs vterm build
     
     # file browser
     mc # midnight commander
@@ -85,8 +87,7 @@
     helix # postmodern text editor
     #vscode
     #emacs-unstable
-    cmake # building vterm in emacs
-    emacs29
+     emacs29
 
     # programming language
     gcc # GNU compiler collection
