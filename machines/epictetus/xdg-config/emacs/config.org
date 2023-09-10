@@ -427,12 +427,12 @@ g#+author: Azizul Rahman Azizan
    #+end_src
 
 ** regex search *swiper*
-   
+
    The package are included by *lispy* and its useful.
    #+begin_src emacs-lisp
      (use-package swiper
        :config
-       (define-key 'ara-map (kbd "s") 'swiper))  
+       (define-key 'ara-map (kbd "s") 'swiper))
    #+end_src
 
 ** jump/hop/util *avy*
@@ -539,10 +539,17 @@ g#+author: Azizul Rahman Azizan
 * Modal key binding *evil*
 
   Using selection based know seem more tedious; trying out evil-mode with less configuration.
-  Too much modification on the software sides  
+  Too much modification on the software sides
   #+begin_src emacs-lisp
     (use-package evil
       :config
+
+      ;; evil mode leader should work only for normal,
+      (evil-set-leader 'normal (kbd "SPC"))
+      ;; shortcut for evil <C-c a> for personal keybind
+      (evil-define-key 'normal 'global (kbd "<leader>a") 'ara-map)
+
+      ;; use org-mode standard cycling heading
       (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
       (evil-mode 1)
 
