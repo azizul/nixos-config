@@ -289,7 +289,12 @@ g#+author: Azizul Rahman Azizan
      ;; remove global command "free-frame";
      (global-set-key (kbd "C-z") nil)
    #+end_src
-
+** Map use default function
+*** windows swap
+    #+begin_src emacs-lisp
+      ;; swap between existing windows
+      (define-key 'ara-map (kbd "w s") 'window-swap-states)
+    #+end_src
 ** Set the backup file path
 
    Remove the tilde into default backup file in .emacs directory
