@@ -557,29 +557,6 @@ g#+author: Azizul Rahman Azizan
      ;; viewing pdf
      (use-package pdf-tools)
    #+end_src
-* COMMENT Modal key binding *evil*
-
-  Using selection based know seem more tedious; trying out evil-mode with less configuration.
-  Too much modification on the software sides
-  #+begin_src emacs-lisp
-    (use-package evil
-      :config
-
-      ;; evil mode leader should work only for normal,
-      (evil-set-leader 'normal (kbd "SPC"))
-      ;; shortcut for evil <C-c a> for personal keybind
-      (evil-define-key 'normal 'global (kbd "<leader>a") 'ara-map)
-
-      ;; use org-mode standard cycling heading
-      (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
-      (evil-mode 1)
-
-      ;; plugin
-      (use-package evil-surround
-	:config
-	(global-evil-surround-mode)))
-
-  #+end_src
 * COMMENT Modal key binding *meow*
   modal editing similar to kakoune (vim inspired)
 ** Defining default #+setupfile: up taken from the example for QWERTY
@@ -723,6 +700,29 @@ g#+author: Azizul Rahman Azizan
        (meow-global-mode 1))
    #+end_src
 
+* COMMENT Modal key binding *evil*
+
+  Using selection based know seem more tedious; trying out evil-mode with less configuration.
+  Too much modification on the software sides
+  #+begin_src emacs-lisp
+    (use-package evil
+      :config
+
+      ;; evil mode leader should work only for normal,
+      (evil-set-leader 'normal (kbd "SPC"))
+      ;; shortcut for evil <C-c a> for personal keybind
+      (evil-define-key 'normal 'global (kbd "<leader>a") 'ara-map)
+
+      ;; use org-mode standard cycling heading
+      (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+      (evil-mode 1)
+
+      ;; plugin
+      (use-package evil-surround
+	:config
+	(global-evil-surround-mode)))
+
+  #+end_src
 * Programming
 ** Workspace management
 
