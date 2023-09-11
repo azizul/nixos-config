@@ -59,7 +59,6 @@
     unzip
     shellcheck # shell script analysis tool
     bat # cat clone with git integration
-    exa # ls replacement in rust
     ydotool # generic command line automation tool
     cava # console base audio visualization for alsa
     neofetch # customize system info script 
