@@ -361,9 +361,10 @@ g#+author: Azizul Rahman Azizan
      ;; set default font
      (add-to-list 'default-frame-alist
 		  '(font . "JetBrainsMonoNL Nerd Font-10"))
+
    #+end_src
 
- * General utility
+* General utility
 ** Git *magit*
 
    Commonly used distributed SCM, useful for tracking file changes, use =C-x g= to get the magit
