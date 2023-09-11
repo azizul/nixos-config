@@ -88,7 +88,7 @@
     helix # postmodern text editor
     #vscode
     #emacs-unstable
-     emacs29
+    emacs29-pgtk
 
     # programming language
     gcc # GNU compiler collection
