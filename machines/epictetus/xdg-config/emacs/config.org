@@ -558,7 +558,7 @@ g#+author: Azizul Rahman Azizan
      ;; viewing pdf
      (use-package pdf-tools)
    #+end_src
-* COMMENT Modal key binding *meow*
+* Modal key binding *meow*
   modal editing similar to kakoune (vim inspired)
 ** Defining default #+setupfile: up taken from the example for QWERTY
    Keybinding configuration for the different states; the normal state is the place to *learn* where
