@@ -117,6 +117,9 @@
     ocamlPackages.utop # ocaml repl
     dune-release
     bubblewrap # sandboxing for ocaml
+    erlang # erlang BEAM
+    elixir # ruby on erlang BEAM
+    elixir-ls # lsp for elixir
 
     # internet browsing
     firefox

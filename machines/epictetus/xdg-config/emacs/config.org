@@ -929,7 +929,7 @@
 	 :hook
 	 (tuareg-mode . utop-minor-mode))
      #+end_src
-*** COMMENT Erlang
+*** Erlang
     For installation of latest OTP (erlang build) use the distribution list provided at
     [[https://www.erlang-solutions.com/downloads/][erlang-solutions]].  Once installed the command to activate otp is =erl=. The installation of
     specific otp version will also include emacs integration mode scripts. =erl= command is an
@@ -941,7 +941,8 @@
       sudo apt-get install erlang
     #+end_src
 
-    #+begin_src emacs-lisp
+    Not sure will be using this in *nixos* environment, since FHS in not available
+    #+begin_src emacs-lisp :tangle no
       ;; load installed provided OTP erlang mode library
       (setq load-path (cons "/usr/lib/erlang/lib/tools-3.5.3/emacs" load-path))
       (setq erlang-root-dir "/usr/lib/erlang/")
@@ -949,7 +950,14 @@
       (require 'erlang-start)
     #+end_src
 
-*** COMMENT Elixir
+    Use the default major mode
+    #+begin_src emacs-lisp
+      ;; erlang major mode
+      (use-package erlang)
+    #+end_src
+   
+
+*** Elixir
     Once setup has bee done to update the latest =apt= repository from =Erlang Solutions=, we can
     install elixir via following command.
     #+begin_src sh :tangle no :results output
@@ -965,9 +973,15 @@
     - mix :: software package management tool
     - iex :: elixir shell
 
-      #+begin_src emacs-lisp
+      #+begin_src emacs-lisp :tangle no
 	;; install elixir major mode with lsp-mode integration
 	(use-package elixir-mode
 	  :init
 	  (add-to-list 'exec-path "~/apps/elixir-ls/release"))
       #+end_src
+
+    For usage with *nixos*, used the cached binary directly in the configuration file
+    #+begin_src emacs-lisp
+      ;; add elixir major mode with elixir-ls on path
+      (use-package elixir-mode)
+    #+end_src
