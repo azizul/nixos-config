@@ -1,5 +1,5 @@
 #+title: Straight Emacs with built-in LSP and Tree Sitter
-g#+author: Azizul Rahman Azizan
+#+author: Azizul Rahman Azizan
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
 #+STARTUP: showAll
 
@@ -867,6 +867,12 @@ g#+author: Azizul Rahman Azizan
 
     #+end_src
 
+*** Haskell
+    Use the ghc with the major mode, where *hs-lint* is included in the major mode.
+    #+begin_src emacs-lisp
+      ;; install haskell-mode
+      (use-package haskell-mode)
+    #+end_src
 *** COMMENT Ocaml
     For installation and setup of ocaml toolchains, see the following [[https://ocaml.org/docs/up-and-running][link]]. The primary tools are:
     - opam :: package manager
