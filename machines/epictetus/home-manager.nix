@@ -238,10 +238,10 @@
     enable = true;
     shellAliases = {
       ll = "ls -l";
-      #os-update = "sudo nixos-rebuild switch";
-      #os-config = "sudo vim /etc/nixos/configuration.nix";
-      #hm-update = "home-manager switch";
-      #hm-config = "vim ~/.config/home-manager/home.nix";
+      emacsd = "emacs --daemon";
+      emacsc = "emacsclient -c";
+      emacsk = "emacsclient -e \"(kill-emacs)\"";
+      emacsb = "emacs --batch -l org config.org -f org-babel-tangle";
     };
     history = {
       size = 1000;
