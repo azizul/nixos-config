@@ -113,9 +113,10 @@
     leiningen # clojure build tools
     ghc # haskell compiler
     opam # ocaml package manager
+    ocamlPackages.merlin # ide helper
+    ocamlPackages.utop # ocaml repl
+    dune-release
     bubblewrap # sandboxing for ocaml
-
-
 
     # internet browsing
     firefox
@@ -250,7 +251,10 @@
     };
     initExtra =
       ''
+      # for session ssh key keychain
       eval `keychain --eval --agents ssh id_ed25519`
+      # ocaml opam
+      eval $(opam env)
       '';
   };
 }

@@ -873,7 +873,7 @@
       ;; install haskell-mode
       (use-package haskell-mode)
     #+end_src
-*** COMMENT Ocaml
+*** Ocaml
     For installation and setup of ocaml toolchains, see the following [[https://ocaml.org/docs/up-and-running][link]]. The primary tools are:
     - opam :: package manager
     - merlin :: ide support
