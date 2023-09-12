@@ -8,7 +8,7 @@
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "${nixos-version}"; # FIXME not sure why this is required
-  
+
   #overlays
   #services.emacs.package = pkgs.emacs-unstable;
   #nixpkgs.overlays = [
@@ -19,8 +19,8 @@
   #];
 
   # enable font management
-  fonts.fontconfig.enable = true; 
-  
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -29,7 +29,7 @@
     (nerdfonts.override { fonts = ["JetBrainsMono" "FantasqueSansMono" "FiraCode" "DroidSansMono" "Iosevka" ]; })
     comfortaa
     inter
-    dotcolon-fonts 
+    dotcolon-fonts
     source-code-pro
     noto-fonts
     noto-fonts-cjk
@@ -61,7 +61,7 @@
     bat # cat clone with git integration
     ydotool # generic command line automation tool
     cava # console base audio visualization for alsa
-    neofetch # customize system info script 
+    neofetch # customize system info script
     cpufetch # fancy cpu architecture script
     starship # customizable prompt for any shell
     sox # simple rate audio converter
@@ -73,12 +73,12 @@
     fd # fuzzy finder for lazy.nvim
     gnumake # linux make; for emacs vterm build
     cmake # cross-platform system generator; for emacs vterm build
-    libtool # generic support script; for emacs vterm build 
-    
+    libtool # generic support script; for emacs vterm build
+
     # file browser
     mc # midnight commander
     xfce.thunar # xfce file manager
-    
+
     # git TUI
     lazygit # simple TUI for git
 
@@ -96,7 +96,7 @@
     #lld # LLVM linker unwrapped
     # FIXME clash with gcc ranlib
     #llvmPackages.bintools # system binary utilities
-    # FIXME clash with gcc ld 
+    # FIXME clash with gcc ld
     #clang # C language frontend for LLVM
     sqlite # SQL db engine
     python3
@@ -110,6 +110,12 @@
     gradle
     go
     clojure
+    leiningen # clojure build tools
+    ghc # haskell compiler
+    opam # ocaml package manager
+    bubblewrap # sandboxing for ocaml
+
+
 
     # internet browsing
     firefox
@@ -117,14 +123,14 @@
     nyxt
     qutebrowser
     lagrange # gemini client
-    
+
     # creative tools
-    gimp # GNU image manipulation program 
+    gimp # GNU image manipulation program
     krita
     musescore
     calibre
     transmission-gtk # fast and easy bitorrent client
-    
+
     # video and audio
     audacious
     vlc # cross platform media player and streaming server
@@ -133,7 +139,7 @@
     # music tools
     sunvox
     ardour
-    
+
     # iso tools
     # etcher   # single usb boot creator
     ventoy  # multiple usb boot iso
@@ -142,7 +148,7 @@
     # virtualization & iso
     podman
     virt-manager
-    
+
     # games
     retroarch
     steam # digitial distribution app
@@ -215,7 +221,7 @@
   ########################
   #### PROGRAMS CONFIG ###
   ########################
-  
+
   # enable git and set the configuration
   programs.git = {
     enable = true;
