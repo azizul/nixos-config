@@ -497,7 +497,7 @@
      (use-package avy
        :config
        ;; commonly used
-       (global-set-key (kbd "C-;") 'avy-goto-char-timer)
+       (global-set-key (kbd "C-:") 'avy-goto-char-timer)
        ;; less frequently used
        (define-key 'ara-map (kbd "g l") 'avy-goto-line)
        (define-key 'ara-map (kbd "g w") 'avy-goto-word-0)
