@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("01-non-important"
+(("git-repo"
+ (filename . "/media/debian-home/zizu/git-repo/")
+ (front-context-string . "github\n  drwxr-x")
+ (rear-context-string . "6 Sep   9 16:28 ")
+ (position . 183)
+ (last-modified 25857 23301 925973 332000))
+("01-non-important"
  (filename . "/media/debian-home/zizu/Documents/01-non-important/")
  (front-context-string . "..\n  drwxrwxr-x ")
  (rear-context-string . "6 Sep   6 10:34 ")
