@@ -566,7 +566,7 @@
 
    Adding integration with *which-key* which exclude the default indicator =embark-verbose-indicator=
    and =embark-mixed-indicator= with the following =embark-which-key-indicator=. 
-   #+begin_src emacs-lisp :tangle no
+   #+begin_src emacs-lisp
      (defun embark-which-key-indicator ()
        "An embark indicator that displays keymaps using which-key.
      The which-key help message will show the type and value of the
