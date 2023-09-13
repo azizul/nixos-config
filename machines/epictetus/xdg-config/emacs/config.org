@@ -358,6 +358,9 @@
      ;; only need to type y/n for yes/no prompt
      (defalias 'yes-or-no-p 'y-or-n-p)
 
+     ;; set the locale to use system (english) for standard use of weekday in english
+     (setq system-time-locale "C")
+
      ;; set default font
      (add-to-list 'default-frame-alist
 		  '(font . "JetBrainsMonoNL Nerd Font-10"))
