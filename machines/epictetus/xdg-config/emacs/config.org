@@ -401,7 +401,11 @@
     #+begin_src emacs-lisp
       ;; modeline for additional information
       (use-package doom-modeline
-	:init (doom-modeline-mode 1))
+	:init (doom-modeline-mode 1)
+	:config
+	;; display time when in fullscreen client
+	(setq doom-modeline-workspace-name t)
+	(display-time-mode))
     #+end_src
     
 * General utility
