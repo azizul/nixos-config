@@ -103,7 +103,7 @@
    #+begin_src sh :results output :tangle no
      pass
    #+end_src
-
+   
    #+RESULTS:
    : Password Store
    : └── main.gmail
@@ -364,6 +364,43 @@
 
    #+end_src
 
+** Theme
+   Separated since the best theme seems to be the default one; however when it gets to shell it's
+   irritating! We'll use back the doom theme pack and it's addon.
+
+*** The prequisite icon & themes
+    #+begin_src emacs-lisp
+      ;; enable the icons for advance themes
+      (use-package all-the-icons
+	:if (display-graphic-p))
+    #+end_src
+    Then run the following to install the icons for the first time
+    #+begin_src emacs-lisp :tangle no
+      (eval (all-the-icons-install-fonts))
+    #+end_src
+    
+*** The main theme
+    We'll use the doom megapack for this
+    #+begin_src emacs-lisp
+      (use-package doom-themes
+	:config
+	;;global config
+	(setq doom-theme-enable-bold t
+	      doom-theme-enable-italic t)
+	(load-theme 'doom-one t)
+	(doom-themes-visual-bell-config)
+	(doom-themes-org-config))
+    #+end_src
+
+*** Themed modeline
+    Since we're using doom theme, install as well the modeline for additional information such as
+    macro reading & lsp informations
+    #+begin_src emacs-lisp
+      ;; modeline for additional information
+      (use-package doom-modeline
+	:init (doom-modeline-mode 1))
+    #+end_src
+    
 * General utility
 ** Git *magit*
 
