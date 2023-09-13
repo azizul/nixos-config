@@ -522,6 +522,92 @@
        (smartparens-global-mode))
    #+end_src
 
+** minibuffer tags/info *marginalia*
+   this is useful package to expand notes on minibuffer; used with *vertico* and *embark*
+   #+begin_src emacs-lisp
+     ;; enable mini-buffer norrowing framework additional information
+     (use-package marginalia
+       :config
+       (marginalia-mode))
+   #+end_src
+** at point action *embark*
+   Another useful package which narrows all possible action at cursor point; rather than we have
+   to search cursor related information whether it is a function, symbol, file, region this would
+   summarizes the possiblilty is drop-down list with shortcuts  for user interaction.
+
+   This would simplify keypress for example selecting a word at cursor for search, opening url etc
+
+   Straight cut and paste from [[https://github.com/oantolin/embark#quick-start][github quick start]]
+   #+begin_src emacs-lisp
+     (use-package embark
+       :bind
+       (("C-." . embark-act)         ;; pick some comfortable binding
+	("C-;" . embark-dwim)        ;; good alternative: M-.
+	("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+
+       :init
+
+       ;; Optionally replace the key help with a completing-read interface
+       ;;(setq prefix-help-command #'embark-prefix-help-command)
+
+       ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
+       ;; strategy, if you want to see the documentation from multiple providers.
+       ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+       (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+       :config
+
+       ;; Hide the mode line of the Embark live/completions buffers
+       (add-to-list 'display-buffer-alist
+		    '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+		      nil
+		      (window-parameters (mode-line-format . none)))))
+   #+end_src
+
+   Adding integration with *which-key* which exclude the default indicator =embark-verbose-indicator=
+   and =embark-mixed-indicator= with the following =embark-which-key-indicator=. 
+   #+begin_src emacs-lisp :tangle no
+     (defun embark-which-key-indicator ()
+       "An embark indicator that displays keymaps using which-key.
+     The which-key help message will show the type and value of the
+     current target followed by an ellipsis if there are further
+     targets."
+       (lambda (&optional keymap targets prefix)
+	 (if (null keymap)
+	     (which-key--hide-popup-ignore-command)
+	   (which-key--show-keymap
+	    (if (eq (plist-get (car targets) :type) 'embark-become)
+		"Become"
+	      (format "Act on %s '%s'%s"
+		      (plist-get (car targets) :type)
+		      (embark--truncate-target (plist-get (car targets) :target))
+		      (if (cdr targets) "…" "")))
+	    (if prefix
+		(pcase (lookup-key keymap prefix 'accept-default)
+		  ((and (pred keymapp) km) km)
+		  (_ (key-binding prefix 'accept-default)))
+	      keymap)
+	    nil nil t (lambda (binding)
+			(not (string-suffix-p "-argument" (cdr binding))))))))
+
+     (setq embark-indicators
+	   '(embark-which-key-indicator
+	     embark-highlight-indicator
+	     embark-isearch-highlight-indicator))
+
+     (defun embark-hide-which-key-indicator (fn &rest args)
+       "Hide the which-key indicator immediately when using the completing-read prompter."
+       (which-key--hide-popup-ignore-command)
+       (let ((embark-indicators
+	      (remq #'embark-which-key-indicator embark-indicators)))
+	 (apply fn args)))
+
+     (advice-add #'embark-completing-read-prompter
+		 :around #'embark-hide-which-key-indicator)
+   #+end_src
+
+   #+RESULTS:
+   
 * Completion
   For the completion using fuzzy type of search, use the =C-h a= to find the matching methods and
   variable in the documentation of elisp interpreter. Note some of dependencies and dependent can
