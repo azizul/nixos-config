@@ -387,7 +387,7 @@
 	;;global config
 	(setq doom-theme-enable-bold t
 	      doom-theme-enable-italic t)
-	(load-theme 'doom-one t)
+	(load-theme 'doom-ayu-dark t)
 	(doom-themes-visual-bell-config)
 	(doom-themes-org-config))
     #+end_src
