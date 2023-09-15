@@ -1165,7 +1165,7 @@
        :straight (:type built-in ))
    #+end_src
 
-** lsp-client *Eglot*
+** COMMENT lsp-client *Eglot*
    Harder
    Used the build-in eglot library; note the eglot has it's own default programs configured
    #+begin_src emacs-lisp
@@ -1432,11 +1432,11 @@
      #+end_src
      
 
-** COMMENT lsp-client *lsp-mode*
+** lsp-client *lsp-mode*
    Better & polished client which work better than current bare bone *eglot*
 
    FIXME Configuration with orderless or corfu as the completion
-   #+begin_src emacs-lisp :tangle no
+   #+begin_src emacs-lisp
      ;; configure lsp breadcrumb
      (defun ara/lsp-mode-setup ()
        (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -1450,7 +1450,7 @@
        :init
        (defun my/lsp-mode-setup-completion ()
 	 (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-	       '(flex))) ;; Configure orderless/flex(corfu)
+	       '(orderless))) ;; Configure orderless/flex(corfu)
        (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
        :config
        (lsp-enable-which-key-integration t)
@@ -1460,7 +1460,7 @@
    #+end_src
 
    Older working configuration but used with *company*
-   #+begin_src emacs-lisp 
+   #+begin_src emacs-lisp :tangle no
 
      ;; configure lsp breadcrumb
      (defun ara/lsp-mode-setup ()
