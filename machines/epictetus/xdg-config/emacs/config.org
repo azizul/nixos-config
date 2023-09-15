@@ -829,7 +829,7 @@
      (use-package orderless
        :ensure t
        :custom
-       (completion-styles '(basic orderless))
+       (completion-styles '(orderless partial-completion basic))
        (completion-category-overrides '((file (styles basic partial-completion)))))
    #+end_src
 
@@ -1369,7 +1369,6 @@
       (use-package erlang)
     #+end_src
    
-
 *** Elixir
     Once setup has bee done to update the latest =apt= repository from =Erlang Solutions=, we can
     install elixir via following command.
