@@ -1425,12 +1425,19 @@
 
      ;; install lsp-mode, set the key binding for the lsp-mode menus
      (use-package lsp-mode
+       :custom
+       (lsp-completion-provider :none) ;; we use Corfu!
        :commands (lsp lsp-deferred)
-       :hook (lsp-mode . ara/lsp-mode-setup)
        :init
+       (defun my/lsp-mode-setup-completion ()
+	 (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+	       '(orderless))) ;; Configure orderless
        (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
        :config
-       (lsp-enable-which-key-integration t))
+       (lsp-enable-which-key-integration t)
+       :hook ((lsp-mode . ara/lsp-mode-setup)
+	      (lsp-completion-mode . my/lsp-mode-setup-completion)))
+
    #+end_src
 
 *** lsp-mode extension UI *lsp-ui*
@@ -1462,7 +1469,6 @@
        (use-package nix-mode
 	 :mode "\\.nix\\'"
 	 :hook ((nix-mode . lsp)))
-
 
      #+end_src
 
