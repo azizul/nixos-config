@@ -104,6 +104,14 @@
            completion-show-help nil
            completion-max-height 15)
    #+end_src
+** spelling correction *ispell*
+   The first is to install the program *hunspell* which for nixos is quite straight forward as well
+   as the dictinaries under the package =hunspellDicts.xxx= in the repositories.
+   
+   #+begin_src emacs-lisp
+     ;; set the hunspell as the default program
+     (setq ispell-program-name "hunspell")
+   #+end_src
 ** password store (auth-source-pass)
 
    This is used to pass encrypted password in *pass* program in startup scripts.
