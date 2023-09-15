@@ -74,7 +74,8 @@
     gnumake # linux make; for emacs vterm build
     cmake # cross-platform system generator; for emacs vterm build
     libtool # generic support script; for emacs vterm build
-
+    ispell # linux interactive spelling tool
+    
     # file browser
     mc # midnight commander
     xfce.thunar # xfce file manager
