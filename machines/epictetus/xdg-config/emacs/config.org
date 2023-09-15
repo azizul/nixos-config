@@ -1172,6 +1172,50 @@
    #+end_src
 
 *** Language
+**** Nix (system builder)
+     #+begin_src emacs-lisp
+       ;; install the major mode
+       (use-package nix-mode
+	 :mode "\\.nix\\'"
+	 :config
+	 (add-to-list 'eglot-server-programs '(nix-mode . ("/media/debian-home/zizu/git-repo/github/grp-nix-community/nixd/result/bin/nixd"))))
+
+     #+end_src
+
+**** Emacs Lisp (elisp)
+***** Another paraedit *lispy*
+
+      Abo-abo package which work well for lisp dialects
+      #+BEGIN_SRC emacs-lisp
+	;; updated version of paredit from abo-abo
+	(use-package lispy
+	  :config
+	  :hook ((emacs-lisp-mode . (lambda ()(lispy-mode 1)))
+		 (lisp-mode . (lambda ()(lispy-mode 1)))))
+	;; need formatter to save time
+	;; (use-package elisp-format); takes to long to format a buffer
+      #+END_SRC
+
+**** Common Lisp
+***** SLY
+
+      SLIME forked should work better with auto completion; Similar to SLIME this is independent of LSP and DAP.
+      Refer to the following [[https://github.com/joaotavora/sly][link]] for the modification and manual (similar to SLIME but with additional features).
+      #+begin_src emacs-lisp
+	;; SLIME forked version sly with sbcl dialect
+	(use-package sly
+	  :config
+	  (setq inferior-lisp-program "sbcl"))
+      #+end_src
+
+**** Java
+     Uses LSP and DAP and based on JDTLS. THe LSP installed server is at =lsp-java-server-install-dir=
+     variable. To update the server, running =lsp-java-update-server=
+     #+begin_src emacs-lisp 
+       ;; install java jdtls lsp mode
+       (use-package lsp-java)
+	 
+     #+end_src
 **** Clojure
 
      For steps is to include the major mode editing for clojure files; this is is using [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]
@@ -1257,42 +1301,6 @@
 		(rust-mode . (lambda ()(prettify-symbols-mode))))
 	 :config
 	 (setq rust-format-on-save t))
-     #+end_src
-
-**** Common Lisp
-***** SLY
-
-      SLIME forked should work better with auto completion; Similar to SLIME this is independent of LSP and DAP.
-      Refer to the following [[https://github.com/joaotavora/sly][link]] for the modification and manual (similar to SLIME but with additional features).
-      #+begin_src emacs-lisp
-	;; SLIME forked version sly with sbcl dialect
-	(use-package sly
-	  :config
-	  (setq inferior-lisp-program "sbcl"))
-      #+end_src
-
-**** Emacs Lisp (elisp)
-***** Another paraedit *lispy*
-
-      Abo-abo package which work well for lisp dialects
-      #+BEGIN_SRC emacs-lisp
-	;; updated version of paredit from abo-abo
-	(use-package lispy
-	  :config
-	  :hook ((emacs-lisp-mode . (lambda ()(lispy-mode 1)))
-		 (lisp-mode . (lambda ()(lispy-mode 1)))))
-	;; need formatter to save time
-	;; (use-package elisp-format); takes to long to format a buffer
-      #+END_SRC
-
-**** Nix (system builder)
-     #+begin_src emacs-lisp
-       ;; install the major mode
-       (use-package nix-mode
-	 :mode "\\.nix\\'"
-	 :config
-	 (add-to-list 'eglot-server-programs '(nix-mode . ("/media/debian-home/zizu/git-repo/github/grp-nix-community/nixd/result/bin/nixd"))))
-
      #+end_src
 
 **** Haskell
@@ -1431,7 +1439,7 @@
        :init
        (defun my/lsp-mode-setup-completion ()
 	 (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-	       '(orderless))) ;; Configure orderless
+	       '(flex))) ;; Configure orderless/flex(corfu)
        (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
        :config
        (lsp-enable-which-key-integration t)
@@ -1499,11 +1507,11 @@
       #+END_SRC
 
 **** Java
- Uses LSP and DAP and based on JDTLS. THe LSP installed server is at =lsp-java-server-install-dir=
- variable. To update the server, running =lsp-java-update-server=
- #+begin_src emacs-lisp 
-   ;; install java jdtls lsp mode
-   (use-package lsp-java
-     :config
-     (add-hook 'java-mode-hook 'lsp))
- #+end_src
+     Uses LSP and DAP and based on JDTLS. THe LSP installed server is at =lsp-java-server-install-dir=
+     variable. To update the server, running =lsp-java-update-server=
+     #+begin_src emacs-lisp 
+       ;; install java jdtls lsp mode
+       (use-package lsp-java
+	 :hook (java-mode . lsp))
+
+     #+end_src

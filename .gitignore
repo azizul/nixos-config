@@ -1,2 +1,6 @@
 .#*
 .lsp-session-*
+eclipse.jdt.ls
+.cache
+.dap-breakpoints
+workspace
