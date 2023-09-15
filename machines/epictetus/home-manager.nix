@@ -76,6 +76,15 @@
     libtool # generic support script; for emacs vterm build
     ispell # linux interactive spelling tool
     hunspell # updated ispell spelling tool
+    aspell # gnu version of improved ispell
+    aspellDicts.en # aspell english dictionary
+    aspellDicts.en-science # aspell scientific jargon
+    aspellDicts.en-computers # aspell computer jargon
+    aspellDicts.de # aspell for german
+    aspellDicts.ru # aspell russian dictionary
+    aspellDicts.ar # aspell arabic dictionary
+    aspellDicts.es # aspell spanish dictionary
+    
     
     # file browser
     mc # midnight commander
