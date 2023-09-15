@@ -75,7 +75,12 @@
     cmake # cross-platform system generator; for emacs vterm build
     libtool # generic support script; for emacs vterm build
     ispell # linux interactive spelling tool
+    
     hunspell # updated ispell spelling tool
+    hunspellDicts.en_US
+    hunspellDicts.ru_RU
+    hunspellDicts.es_ES
+    
     aspell # gnu version of improved ispell
     aspellDicts.en # aspell english dictionary
     aspellDicts.en-science # aspell scientific jargon
