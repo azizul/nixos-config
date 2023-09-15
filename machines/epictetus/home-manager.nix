@@ -136,6 +136,7 @@
     erlang # erlang BEAM
     elixir # ruby on erlang BEAM
     elixir-ls # lsp for elixir
+    nil # nix lsp server
 
     # internet browsing
     firefox
