@@ -1166,7 +1166,11 @@
    #+end_src
 
 ** COMMENT lsp-client *Eglot*
-   Harder
+   This build-in library is not polished yet; main support is still with *lsp-mode* which have
+   better documentation and UI layout; i.e. =lsp-java= vs =eglot-java= where the former has better
+   documentation support and the latter only allow auto-complete to work; both allow nixos use by
+   allowing lsp server to be downloaded into emacs folders.
+   
    Used the build-in eglot library; note the eglot has it's own default programs configured
    #+begin_src emacs-lisp
      (use-package eglot
