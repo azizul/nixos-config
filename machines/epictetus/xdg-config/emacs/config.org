@@ -99,10 +99,10 @@
      ;; default icomplete
      (icomplete-vertical-mode)
      (setq completion-auto-wrap t
-           completion-auto-select t
-           completion-cycling t
-           completion-show-help nil
-           completion-max-height 15)
+	   completion-auto-select t
+	   completion-cycling t
+	   completion-show-help nil
+	   completion-max-height 15)
    #+end_src
 ** spelling correction *ispell*
    The first is to install the program *hunspell* which for nixos is quite straight forward as well
@@ -1153,7 +1153,7 @@
 
   #+end_src
 * Programming
-** Workspace management
+** Workspace management *project*
 
    Used the built-in project, the key map is =C-x p=
 
@@ -1163,7 +1163,7 @@
        :straight (:type built-in ))
    #+end_src
 
-** Eglot
+** COMMENT lsp-client *Eglot*
 
    Used the build-in eglot library; note the eglot has it's own default programs configured
    #+begin_src emacs-lisp
@@ -1171,244 +1171,298 @@
        :straight (:type built-in))
    #+end_src
 
-** Language
-*** Clojure
+*** Language
+**** Clojure
 
-    For steps is to include the major mode editing for clojure files; this is is using [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]
-    #+begin_src emacs-lisp
-      ;; major mode for clojure editing
-      (use-package clojure-mode)
-    #+end_src
+     For steps is to include the major mode editing for clojure files; this is is using [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]
+     #+begin_src emacs-lisp
+       ;; major mode for clojure editing
+       (use-package clojure-mode)
+     #+end_src
 
-    Then we include the interactive development package using [[https://cider.mx/][cider]] which should gave us similar
-    editing like common-lisp and sly integration.
-    #+begin_src emacs-lisp
-      ;; clojure interactive development
-      (use-package cider)
-    #+end_src
+     Then we include the interactive development package using [[https://cider.mx/][cider]] which should gave us similar
+     editing like common-lisp and sly integration.
+     #+begin_src emacs-lisp
+       ;; clojure interactive development
+       (use-package cider)
+     #+end_src
 
-*** Typescript
+**** Typescript
 
-    #+begin_src emacs-lisp
+     #+begin_src emacs-lisp
 
-      ;; programming typescript with lsp
-      (use-package typescript-mode
-	:mode "\\.ts\\'"
-	:config
-	(setq typescript-indent-level 2))
+       ;; programming typescript with lsp
+       (use-package typescript-mode
+	 :mode "\\.ts\\'"
+	 :config
+	 (setq typescript-indent-level 2))
 
-    #+end_src
+     #+end_src
 
-    *Important note!* For =lsp-mode= to work with TypeScript (and JavaScript) you will need to
-    install a language server on your machine.  If you have Node.js installed, the easiest way to do
-    that is by running the following command:
+     *Important note!* For =lsp-mode= to work with TypeScript (and JavaScript) you will need to
+     install a language server on your machine.  If you have Node.js installed, the easiest way to do
+     that is by running the following command:
 
-    #+begin_src shell :tangle no
+     #+begin_src shell :tangle no
 
-      npm install -g typescript-language-server typescript
+       npm install -g typescript-language-server typescript
 
-    #+end_src
+     #+end_src
 
-    This will install the [[https://github.com/theia-ide/typescript-language-server][typescript-language-server]] and the TypeScript compiler package.
-*** Python
+     This will install the [[https://github.com/theia-ide/typescript-language-server][typescript-language-server]] and the TypeScript compiler package.
+**** Python
 
-    We use =lsp-mode= and =dap-mode= to provide a more complete development environment for Python
-    in Emacs.  Check out [[https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/][the =pyls= configuration]] in the =lsp-mode= documentation for more details.
+     We use =lsp-mode= and =dap-mode= to provide a more complete development environment for Python
+     in Emacs.  Check out [[https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/][the =pyls= configuration]] in the =lsp-mode= documentation for more details.
 
-    Make sure you have the =pyls= language server installed before trying =lsp-mode=!
+     Make sure you have the =pyls= language server installed before trying =lsp-mode=!
 
-    #+begin_src sh :tangle no
+     #+begin_src sh :tangle no
 
-      pip install --user "python-language-server[all]"
+       pip install --user "python-language-server[all]"
 
-    #+end_src
+     #+end_src
 
-    There are a number of other language servers for Python so if you find that =pyls= doesn't work
-    for you, consult the =lsp-mode= [[https://emacs-lsp.github.io/lsp-mode/page/languages/][language configuration documentation]] to try the others!
+     There are a number of other language servers for Python so if you find that =pyls= doesn't work
+     for you, consult the =lsp-mode= [[https://emacs-lsp.github.io/lsp-mode/page/languages/][language configuration documentation]] to try the others!
 
-    #+begin_src emacs-lisp
-      ;; install python + lsp
-      (use-package python-mode)
-    #+end_src
+     #+begin_src emacs-lisp
+       ;; install python + lsp
+       (use-package python-mode)
+     #+end_src
 
-*** Zig
+**** Zig
 
-    Simple installation of getting the binary compiler and placing it in the =PATH=. Once installed
-    we can build the lsp server made from Zig =zls= and using the integration with =lsp-mode=
-    package.
-    - zls :: Get the source code and build it using git; see [[https://github.com/zigtools/zls][link]]
-    - zig-mode :: Zig major mode for syntax highlighting
+     Simple installation of getting the binary compiler and placing it in the =PATH=. Once installed
+     we can build the lsp server made from Zig =zls= and using the integration with =lsp-mode=
+     package.
+     - zls :: Get the source code and build it using git; see [[https://github.com/zigtools/zls][link]]
+     - zig-mode :: Zig major mode for syntax highlighting
+       #+begin_src emacs-lisp
+	 ;; install main mode with lsp integrated with zls
+	 (use-package zig-mode)
+       #+end_src
+
+**** C and C++
+
+     *eglot* has some default configuration; seems to work fast enough
+
+**** Rust
+
+     Depends on the tree-sitter for syntax highlighting and LSP for advanced options
+     #+begin_src emacs-lisp
+       ;; add rust + lsp
+       (use-package rust-mode
+	 :hook ((rust-mode . (lambda ()(setq indent-tabs-mode nil)))
+		(rust-mode . (lambda ()(prettify-symbols-mode))))
+	 :config
+	 (setq rust-format-on-save t))
+     #+end_src
+
+**** Common Lisp
+***** SLY
+
+      SLIME forked should work better with auto completion; Similar to SLIME this is independent of LSP and DAP.
+      Refer to the following [[https://github.com/joaotavora/sly][link]] for the modification and manual (similar to SLIME but with additional features).
       #+begin_src emacs-lisp
-	;; install main mode with lsp integrated with zls
-	(use-package zig-mode)
+	;; SLIME forked version sly with sbcl dialect
+	(use-package sly
+	  :config
+	  (setq inferior-lisp-program "sbcl"))
       #+end_src
 
-*** C and C++
+**** Emacs Lisp (elisp)
+***** Another paraedit *lispy*
 
-    *eglot* has some default configuration; seems to work fast enough
+      Abo-abo package which work well for lisp dialects
+      #+BEGIN_SRC emacs-lisp
+	;; updated version of paredit from abo-abo
+	(use-package lispy
+	  :config
+	  :hook ((emacs-lisp-mode . (lambda ()(lispy-mode 1)))
+		 (lisp-mode . (lambda ()(lispy-mode 1)))))
+	;; need formatter to save time
+	;; (use-package elisp-format); takes to long to format a buffer
+      #+END_SRC
 
-*** Rust
-
-    Depends on the tree-sitter for syntax highlighting and LSP for advanced options
-    #+begin_src emacs-lisp
-      ;; add rust + lsp
-      (use-package rust-mode
-	:hook ((rust-mode . (lambda ()(setq indent-tabs-mode nil)))
-	       (rust-mode . (lambda ()(prettify-symbols-mode))))
-	:config
-	(setq rust-format-on-save t))
-    #+end_src
-
-*** Common Lisp
-**** SLY
-
-     SLIME forked should work better with auto completion; Similar to SLIME this is independent of LSP and DAP.
-     Refer to the following [[https://github.com/joaotavora/sly][link]] for the modification and manual (similar to SLIME but with additional features).
+**** Nix (system builder)
      #+begin_src emacs-lisp
-       ;; SLIME forked version sly with sbcl dialect
-       (use-package sly
+       ;; install the major mode
+       (use-package nix-mode
+	 :mode "\\.nix\\'"
 	 :config
-	 (setq inferior-lisp-program "sbcl"))
+	 (add-to-list 'eglot-server-programs '(nix-mode . ("/media/debian-home/zizu/git-repo/github/grp-nix-community/nixd/result/bin/nixd"))))
+
      #+end_src
 
-*** Emacs Lisp (elisp)
-**** Another paraedit *lispy*
-
-     Abo-abo package which work well for lisp dialects
-     #+BEGIN_SRC emacs-lisp
-       ;; updated version of paredit from abo-abo
-       (use-package lispy
-	 :config
-	 :hook ((emacs-lisp-mode . (lambda ()(lispy-mode 1)))
-		(lisp-mode . (lambda ()(lispy-mode 1)))))
-       ;; need formatter to save time
-       ;; (use-package elisp-format); takes to long to format a buffer
-     #+END_SRC
-
-*** Nix (system builder)
-    #+begin_src emacs-lisp
-      ;; install the major mode
-      (use-package nix-mode
-	:mode "\\.nix\\'"
-	:config
-	(add-to-list 'eglot-server-programs '(nix-mode . ("/media/debian-home/zizu/git-repo/github/grp-nix-community/nixd/result/bin/nixd"))))
-
-    #+end_src
-
-*** Haskell
-    Use the ghc with the major mode, where *hs-lint* is included in the major mode.
-    #+begin_src emacs-lisp
-      ;; install haskell-mode
-      (use-package haskell-mode)
-    #+end_src
-*** Ocaml
-    For installation and setup of ocaml toolchains, see the following [[https://ocaml.org/docs/up-and-running][link]]. The primary tools are:
-    - opam :: package manager
-    - merlin :: ide support
-    - dune :: build tool
-    - utop :: repl
-
-**** opam merlin installation output emacs config guide
-     Since we are using the repository to install the merline integration the output of opam merlin
-     can be simplified to use-pacage config
-
-     #+begin_src emacs-lisp :tangle no
-       ;; baseline config which imports general config in opam/default/share
-       ;; Add opam emacs directory to your load-path by appending this to your .emacs:
-       (let ((opam-share (ignore-errors (car (process-lines "opam" "var" "share")))))
-	 (when (and opam-share (file-directory-p opam-share))
-	   ;; Register Merlin
-	   (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
-	   (autoload 'merlin-mode "merlin" nil t nil)
-	   ;; Automatically start it in OCaml buffers
-	   (add-hook 'tuareg-mode-hook 'merlin-mode t)
-	   (add-hook 'caml-mode-hook 'merlin-mode t)
-	   ;; Use opam switch to lookup ocamlmerlin binary
-	   (setq merlin-command 'opam)))
-
-       ;; add the major mode hook required above
-     #+end_src
-**** use-package equivalent setup
-     Following the installation from the [[https://batsov.com/articles/2022/08/23/setting-up-emacs-for-ocaml-development/][link]] which uses use-package only
+**** Haskell
+     Use the ghc with the major mode, where *hs-lint* is included in the major mode.
      #+begin_src emacs-lisp
-       (use-package merlin
-	 :hook ((tuareg-mode . merlin-mode)
-		(caml-mode . merlin-mode)
-		(merlin-mode . company-mode))
-	 :config
-	 (setq merlin-command 'opam))
-
-       ;; ocaml major mode
-       (use-package tuareg)
-
-       ;; ocaml dune config file major mode
-       (use-package dune)
-
-       ;; merlin documentation
-       (use-package merlin-eldoc
-	 :hook (tuareg-mode . merlin-eldoc-setup))
-
-       ;; use merlin internal
-       (use-package flycheck-ocaml
-	 :config
-	 (flycheck-ocaml-setup))
-
-       (use-package utop
-	 :hook
-	 (tuareg-mode . utop-minor-mode))
+       ;; install haskell-mode
+       (use-package haskell-mode)
      #+end_src
-*** Erlang
-    For installation of latest OTP (erlang build) use the distribution list provided at
-    [[https://www.erlang-solutions.com/downloads/][erlang-solutions]].  Once installed the command to activate otp is =erl=. The installation of
-    specific otp version will also include emacs integration mode scripts. =erl= command is an
-    emulator (virtual machine).
-    #+begin_src sh :tangle no :results output
-      wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
-      sudo dpkg -i erlang-solutions_2.0_all.deb
-      sudo apt-get update
-      sudo apt-get install erlang
-    #+end_src
+**** Ocaml
+     For installation and setup of ocaml toolchains, see the following [[https://ocaml.org/docs/up-and-running][link]]. The primary tools are:
+     - opam :: package manager
+     - merlin :: ide support
+     - dune :: build tool
+     - utop :: repl
 
-    Not sure will be using this in *nixos* environment, since FHS in not available
-    #+begin_src emacs-lisp :tangle no
-      ;; load installed provided OTP erlang mode library
-      (setq load-path (cons "/usr/lib/erlang/lib/tools-3.5.3/emacs" load-path))
-      (setq erlang-root-dir "/usr/lib/erlang/")
-      (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-      (require 'erlang-start)
-    #+end_src
-
-    Use the default major mode
-    #+begin_src emacs-lisp
-      ;; erlang major mode
-      (use-package erlang)
-    #+end_src
-   
-*** Elixir
-    Once setup has bee done to update the latest =apt= repository from =Erlang Solutions=, we can
-    install elixir via following command.
-    #+begin_src sh :tangle no :results output
-      sudo apt-get update
-      sudo apt-get install elixir
-    #+end_src
-
-    Then we build the [[https://github.com/elixir-lsp/elixir-ls][language server]] to integrate with emacs =lsp-mode= which provided dap
-    debugging, in contrast with the built-in =eglot= library. The =elixir-ls= server is written in
-    elixir itself.  Here are some of the installed toolchains (installed at =/usr/lib/elixir/bin=);
-    - elixir :: script runner
-    - elixirrc :: compiler
-    - mix :: software package management tool
-    - iex :: elixir shell
+***** opam merlin installation output emacs config guide
+      Since we are using the repository to install the merline integration the output of opam merlin
+      can be simplified to use-pacage config
 
       #+begin_src emacs-lisp :tangle no
-	;; install elixir major mode with lsp-mode integration
-	(use-package elixir-mode
-	  :init
-	  (add-to-list 'exec-path "~/apps/elixir-ls/release"))
+	;; baseline config which imports general config in opam/default/share
+	;; Add opam emacs directory to your load-path by appending this to your .emacs:
+	(let ((opam-share (ignore-errors (car (process-lines "opam" "var" "share")))))
+	  (when (and opam-share (file-directory-p opam-share))
+	    ;; Register Merlin
+	    (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
+	    (autoload 'merlin-mode "merlin" nil t nil)
+	    ;; Automatically start it in OCaml buffers
+	    (add-hook 'tuareg-mode-hook 'merlin-mode t)
+	    (add-hook 'caml-mode-hook 'merlin-mode t)
+	    ;; Use opam switch to lookup ocamlmerlin binary
+	    (setq merlin-command 'opam)))
+
+	;; add the major mode hook required above
+      #+end_src
+***** use-package equivalent setup
+      Following the installation from the [[https://batsov.com/articles/2022/08/23/setting-up-emacs-for-ocaml-development/][link]] which uses use-package only
+      #+begin_src emacs-lisp
+	(use-package merlin
+	  :hook ((tuareg-mode . merlin-mode)
+		 (caml-mode . merlin-mode)
+		 (merlin-mode . company-mode))
+	  :config
+	  (setq merlin-command 'opam))
+
+	;; ocaml major mode
+	(use-package tuareg)
+
+	;; ocaml dune config file major mode
+	(use-package dune)
+
+	;; merlin documentation
+	(use-package merlin-eldoc
+	  :hook (tuareg-mode . merlin-eldoc-setup))
+
+	;; use merlin internal
+	(use-package flycheck-ocaml
+	  :config
+	  (flycheck-ocaml-setup))
+
+	(use-package utop
+	  :hook
+	  (tuareg-mode . utop-minor-mode))
+      #+end_src
+**** Erlang
+     For installation of latest OTP (erlang build) use the distribution list provided at
+     [[https://www.erlang-solutions.com/downloads/][erlang-solutions]].  Once installed the command to activate otp is =erl=. The installation of
+     specific otp version will also include emacs integration mode scripts. =erl= command is an
+     emulator (virtual machine).
+     #+begin_src sh :tangle no :results output
+       wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb
+       sudo dpkg -i erlang-solutions_2.0_all.deb
+       sudo apt-get update
+       sudo apt-get install erlang
+     #+end_src
+
+     Not sure will be using this in *nixos* environment, since FHS in not available
+     #+begin_src emacs-lisp :tangle no
+       ;; load installed provided OTP erlang mode library
+       (setq load-path (cons "/usr/lib/erlang/lib/tools-3.5.3/emacs" load-path))
+       (setq erlang-root-dir "/usr/lib/erlang/")
+       (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+       (require 'erlang-start)
+     #+end_src
+
+     Use the default major mode
+     #+begin_src emacs-lisp
+       ;; erlang major mode
+       (use-package erlang)
+     #+end_src
+   
+**** Elixir
+     Once setup has bee done to update the latest =apt= repository from =Erlang Solutions=, we can
+     install elixir via following command.
+     #+begin_src sh :tangle no :results output
+       sudo apt-get update
+       sudo apt-get install elixir
+     #+end_src
+
+     Then we build the [[https://github.com/elixir-lsp/elixir-ls][language server]] to integrate with emacs =lsp-mode= which provided dap
+     debugging, in contrast with the built-in =eglot= library. The =elixir-ls= server is written in
+     elixir itself.  Here are some of the installed toolchains (installed at =/usr/lib/elixir/bin=);
+     - elixir :: script runner
+     - elixirrc :: compiler
+     - mix :: software package management tool
+     - iex :: elixir shell
+
+       #+begin_src emacs-lisp :tangle no
+	 ;; install elixir major mode with lsp-mode integration
+	 (use-package elixir-mode
+	   :init
+	   (add-to-list 'exec-path "~/apps/elixir-ls/release"))
+       #+end_src
+
+     For usage with *nixos*, used the cached binary directly in the configuration file
+     #+begin_src emacs-lisp
+       ;; add elixir major mode with elixir-ls on path
+       (use-package elixir-mode)
+     #+end_src
+     
+
+** lsp-client *lsp-mode*
+   Better & polished client which work better than current bare bone *eglot*
+
+   #+begin_src emacs-lisp
+     ;; configure lsp breadcrumb
+     (defun ara/lsp-mode-setup ()
+       (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+       (lsp-headerline-breadcrumb-mode))
+
+     ;; install lsp-mode, set the key binding for the lsp-mode menus
+     (use-package lsp-mode
+       :commands (lsp lsp-deferred)
+       :hook (lsp-mode . ara/lsp-mode-setup)
+       :init
+       (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+       :config
+       (lsp-enable-which-key-integration t))
+   #+end_src
+
+*** lsp-mode extension UI *lsp-ui*
+    [[https://emacs-lsp.github.io/lsp-ui/][lsp-ui]] is a set of UI enhancements built on top of =lsp-mode= which make Emacs feel even more
+    like an IDE.  Check out the screenshots on the =lsp-ui= homepage (linked at the beginning of
+    this paragraph) to see examples of what it can do.
+
+    - lsp-ui-sidelines :: virtual text on right hand side
+    - lsp-ui-peek :: peek references
+    - lsp-ui-doc :: pop-up or windows menu 
+    - lsp-ui-imenu :: similar to treemacs side view outline
+
+      #+begin_src emacs-lisp 
+
+	;; enhancement to lsp-mode ui
+	(use-package lsp-ui
+	  :hook (lsp-mode . lsp-ui-mode)
+	  :custom
+	  (lsp-ui-doc-position 'bottom))
+
       #+end_src
 
-    For usage with *nixos*, used the cached binary directly in the configuration file
-    #+begin_src emacs-lisp
-      ;; add elixir major mode with elixir-ls on path
-      (use-package elixir-mode)
-    #+end_src
+*** lsp-mode debug extension 
+
+*** Language
+**** Nix (system builder)
+     #+begin_src emacs-lisp
+       ;; install the major mode
+       (use-package nix-mode
+	 :mode "\\.nix\\'"
+	 :hook ((nix-mode . lsp)))
+
+
+     #+end_src
+
