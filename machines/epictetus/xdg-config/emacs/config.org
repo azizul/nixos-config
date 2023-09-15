@@ -692,136 +692,6 @@
        (setq enable-recursive-minibuffers t))
    #+end_src
 
-** Code completion *company*
-
-   Company actually improves the usage of =completion-at-point= function to be very polished (drop
-   downlist); This would be used in conjunction for general narrowing framework (ivy, helm, vertico,
-   odorless) since company provide completion at buffer with integration of the backend such as lsp,
-   major mode provided completion and other suchs tags
-
-   Full fledge completion
-   #+begin_src emacs-lisp :tangle no
-     ;; install company and enable it on global level
-     (use-package company
-       :config
-       (global-company-mode))
-   #+end_src
-
-   3rd party capf provider backends
-   #+begin_src emacs-lisp
-     (use-package company)
-   #+end_src
-
-** Code completion (require capf backends) *corfu*
-   Since this should be using the main function provider of completion with *cape* providing
-   the additional backends adapters and others *company*
-   
-   #+begin_src emacs-lisp
-     (use-package corfu
-       ;; Optional customizations
-       ;; :custom
-       ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-       ;; (corfu-auto t)                 ;; Enable auto completion
-       ;; (corfu-separator ?\s)          ;; Orderless field separator
-       ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-       ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-       ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-       ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-       ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-       ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-
-       ;; Enable Corfu only for certain modes.
-       ;; :hook ((prog-mode . corfu-mode)
-       ;;        (shell-mode . corfu-mode)
-       ;;        (eshell-mode . corfu-mode))
-
-       ;; Recommended: Enable Corfu globally.
-       ;; This is recommended since Dabbrev can be used globally (M-/).
-       ;; See also `global-corfu-modes'.
-       :init
-       (global-corfu-mode))
-
-     ;; A few more useful configurations...
-     (use-package emacs
-       :init
-       ;; TAB cycle if there are only few candidates
-       (setq completion-cycle-threshold 3)
-
-       ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-       ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-       ;; (setq read-extended-command-predicate
-       ;;       #'command-completion-default-include-p)
-
-       ;; Enable indentation+completion using the TAB key.
-       ;; `completion-at-point' is often bound to M-TAB.
-       (setq tab-always-indent 'complete))
-   #+end_src
-
-   #+RESULTS:
-
-** Capf backends *cape*
-   Add additional capf as well as third party capf backends.
-   
-   #+begin_src emacs-lisp
-     ;; capf corfu provider and add from 3rd party
-     (use-package cape
-       ;; Bind dedicated completion commands
-       ;; Alternative prefix keys: C-c p, M-p, M-+, ...
-       :bind (("C-c p p" . completion-at-point) ;; capf
-	      ("C-c p t" . complete-tag)        ;; etags
-	      ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
-	      ("C-c p h" . cape-history)
-	      ("C-c p f" . cape-file)
-	      ("C-c p k" . cape-keyword)
-	      ("C-c p s" . cape-elisp-symbol)
-	      ("C-c p e" . cape-elisp-block)
-	      ("C-c p a" . cape-abbrev)
-	      ("C-c p l" . cape-line)
-	      ("C-c p w" . cape-dict)
-	      ("C-c p :" . cape-emoji)
-	      ("C-c p \\" . cape-tex)
-	      ("C-c p _" . cape-tex)
-	      ("C-c p ^" . cape-tex)
-	      ("C-c p &" . cape-sgml)
-	      ("C-c p r" . cape-rfc1345))
-       :init
-       ;; Add to the global default value of `completion-at-point-functions' which is
-       ;; used by `completion-at-point'.  The order of the functions matters, the
-       ;; first function returning a result wins.  Note that the list of buffer-local
-       ;; completion functions takes precedence over the global list.
-       (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-       (add-to-list 'completion-at-point-functions #'cape-file)
-       (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-       (add-to-list 'completion-at-point-functions #'cape-history)
-       (add-to-list 'completion-at-point-functions #'cape-keyword)
-       (add-to-list 'completion-at-point-functions #'cape-tex)
-       (add-to-list 'completion-at-point-functions #'cape-sgml)
-       (add-to-list 'completion-at-point-functions #'cape-rfc1345)
-       (add-to-list 'completion-at-point-functions #'cape-abbrev)
-       (add-to-list 'completion-at-point-functions #'cape-dict)
-       (add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
-       (add-to-list 'completion-at-point-functions #'cape-line)
-       )
-   #+end_src
-
-   #+RESULTS:
-   : cape-rfc1345
-   
-   We could use company backend with cape-company-capf adapter
-   #+begin_src emacs-lisp
-     ;; convert company backend to capf
-     ;; Use Company backends as Capfs.
-     (setq-local completion-at-point-functions
-		 (mapcar #'cape-company-to-capf
-			 (list #'company-files
-			       #'company-keywords
-			       #'company-dabbrev
-			       #'company-cmake
-			       #'company-clang
-			       #'company-etags
-			       #'company-gtags)))
-   #+end_src
-
 ** narrowing or completion filter *oderless*
    This would make narrowing better such as matching not in order.
    #+begin_src emacs-lisp
@@ -961,6 +831,151 @@
        ;;;; 5. No project support
        ;; (setq consult-project-function nil)
        )
+   #+end_src
+
+   For integrating into the eval minibuffer, we'll add the following
+   #+begin_src emacs-lisp
+     ;; Use `consult-completion-in-region' if Vertico is enabled.
+     ;; Otherwise use the default `completion--in-region' function.
+     (setq completion-in-region-function
+	   (lambda (&rest args)
+	     (apply (if vertico-mode
+			#'consult-completion-in-region
+		      #'completion--in-region)
+		    args)))
+   #+end_src
+
+   #+RESULTS:
+   | lambda | (&rest args) | (apply (if vertico-mode #'consult-completion-in-region #'completion--in-region) args) |
+
+** Code completion *company*
+
+   Company actually improves the usage of =completion-at-point= function to be very polished (drop
+   downlist); This would be used in conjunction for general narrowing framework (ivy, helm, vertico,
+   odorless) since company provide completion at buffer with integration of the backend such as lsp,
+   major mode provided completion and other suchs tags
+
+   Full fledge completion
+   #+begin_src emacs-lisp :tangle no
+     ;; install company and enable it on global level
+     (use-package company
+       :config
+       (global-company-mode))
+   #+end_src
+
+   3rd party capf provider backends
+   #+begin_src emacs-lisp
+     (use-package company)
+   #+end_src
+
+** Code completion (require capf backends) *corfu*
+   Since this should be using the main function provider of completion with *cape* providing
+   the additional backends adapters and others *company*
+   
+   #+begin_src emacs-lisp
+     (use-package corfu
+       ;; Optional customizations
+       ;; :custom
+       ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+       ;; (corfu-auto t)                 ;; Enable auto completion
+       ;; (corfu-separator ?\s)          ;; Orderless field separator
+       ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+       ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+       ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+       ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+       ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+       ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+
+       ;; Enable Corfu only for certain modes.
+       ;; :hook ((prog-mode . corfu-mode)
+       ;;        (shell-mode . corfu-mode)
+       ;;        (eshell-mode . corfu-mode))
+
+       ;; Recommended: Enable Corfu globally.
+       ;; This is recommended since Dabbrev can be used globally (M-/).
+       ;; See also `global-corfu-modes'.
+       :init
+       (global-corfu-mode))
+
+     ;; A few more useful configurations...
+     (use-package emacs
+       :init
+       ;; TAB cycle if there are only few candidates
+       (setq completion-cycle-threshold 3)
+
+       ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
+       ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
+       ;; (setq read-extended-command-predicate
+       ;;       #'command-completion-default-include-p)
+
+       ;; Enable indentation+completion using the TAB key.
+       ;; `completion-at-point' is often bound to M-TAB.
+       (setq tab-always-indent 'complete))
+   #+end_src
+
+   #+RESULTS:
+
+** Capf backends *cape*
+   Add additional capf as well as third party capf backends.
+   
+   #+begin_src emacs-lisp
+     ;; capf corfu provider and add from 3rd party
+     (use-package cape
+       ;; Bind dedicated completion commands
+       ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+       :bind (("C-c p p" . completion-at-point) ;; capf
+	      ("C-c p t" . complete-tag)        ;; etags
+	      ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
+	      ("C-c p h" . cape-history)
+	      ("C-c p f" . cape-file)
+	      ("C-c p k" . cape-keyword)
+	      ("C-c p s" . cape-elisp-symbol)
+	      ("C-c p e" . cape-elisp-block)
+	      ("C-c p a" . cape-abbrev)
+	      ("C-c p l" . cape-line)
+	      ("C-c p w" . cape-dict)
+	      ("C-c p :" . cape-emoji)
+	      ("C-c p \\" . cape-tex)
+	      ("C-c p _" . cape-tex)
+	      ("C-c p ^" . cape-tex)
+	      ("C-c p &" . cape-sgml)
+	      ("C-c p r" . cape-rfc1345))
+       :init
+       ;; Add to the global default value of `completion-at-point-functions' which is
+       ;; used by `completion-at-point'.  The order of the functions matters, the
+       ;; first function returning a result wins.  Note that the list of buffer-local
+       ;; completion functions takes precedence over the global list.
+       (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+       (add-to-list 'completion-at-point-functions #'cape-file)
+       (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+       (add-to-list 'completion-at-point-functions #'cape-history)
+       (add-to-list 'completion-at-point-functions #'cape-keyword)
+       (add-to-list 'completion-at-point-functions #'cape-tex)
+       (add-to-list 'completion-at-point-functions #'cape-sgml)
+       (add-to-list 'completion-at-point-functions #'cape-rfc1345)
+       (add-to-list 'completion-at-point-functions #'cape-abbrev)
+       (add-to-list 'completion-at-point-functions #'cape-dict)
+       (add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+       (add-to-list 'completion-at-point-functions #'cape-line)
+       )
+   #+end_src
+
+   #+RESULTS:
+   : cape-rfc1345
+   
+   We could use company backend with cape-company-capf adapter
+   #+begin_src emacs-lisp
+     ;; convert company backend to capf
+     ;; Use Company backends as Capfs.
+     (setq-local completion-at-point-functions
+		 (mapcar #'cape-company-to-capf
+			 (list #'company-files
+			       #'company-keywords
+			       #'company-dabbrev
+			       #'company-cmake
+			       #'company-clang
+			       #'company-etags
+			       #'company-gtags)))
    #+end_src
 
 * Documents
