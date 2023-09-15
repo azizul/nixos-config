@@ -639,6 +639,7 @@
    #+RESULTS:
    
 ** narrowing list *vertico*
+   The newest stuff doesn't work well
    ;; code and paste from the [[https://github.com/minad/vertico#configuration][url]]
    #+begin_src emacs-lisp
      ;; Enable vertico
@@ -690,17 +691,6 @@
 
        ;; Enable recursive minibuffers
        (setq enable-recursive-minibuffers t))
-   #+end_src
-
-** narrowing or completion filter *oderless*
-   This would make narrowing better such as matching not in order.
-   #+begin_src emacs-lisp
-     ;; make narrowing or completion better like fuzzy finder
-     (use-package orderless
-       :ensure t
-       :custom
-       (completion-styles '(orderless partial-completion basic))
-       (completion-category-overrides '((file (styles basic partial-completion)))))
    #+end_src
 
 ** emacs enhanced command with fuzzy finder *consult*
@@ -848,6 +838,17 @@
    #+RESULTS:
    | lambda | (&rest args) | (apply (if vertico-mode #'consult-completion-in-region #'completion--in-region) args) |
 
+** narrowing or completion filter *oderless*
+   This would make narrowing better such as matching not in order.
+   #+begin_src emacs-lisp
+     ;; make narrowing or completion better like fuzzy finder
+     (use-package orderless
+       :ensure t
+       :custom
+       (completion-styles '(orderless partial-completion basic))
+       (completion-category-overrides '((file (styles basic partial-completion)))))
+   #+end_src
+
 ** Code completion *company*
 
    Company actually improves the usage of =completion-at-point= function to be very polished (drop
@@ -863,12 +864,13 @@
        (global-company-mode))
    #+end_src
 
-   3rd party capf provider backends
+   3rd party capf provider backends. At the moment this doesn't work for some reason perhaps the
+   older configuration using ivy works better.
    #+begin_src emacs-lisp :tangle no
      (use-package company)
    #+end_src
 
-** COMMENT Code completion (require capf backends) *corfu*
+** Code completion (require capf backends) *corfu*
    Since this should be using the main function provider of completion with *cape* providing
    the additional backends adapters and others *company*
    
@@ -915,7 +917,7 @@
 
    #+RESULTS:
 
-** COMMENT Capf backends *cape*
+** Capf backends *cape*
    Add additional capf as well as third party capf backends.
    
    #+begin_src emacs-lisp
@@ -1164,7 +1166,7 @@
    #+end_src
 
 ** COMMENT lsp-client *Eglot*
-
+   Harder
    Used the build-in eglot library; note the eglot has it's own default programs configured
    #+begin_src emacs-lisp
      (use-package eglot
@@ -1213,9 +1215,15 @@
      variable. To update the server, running =lsp-java-update-server=
      #+begin_src emacs-lisp 
        ;; install java jdtls lsp mode
-       (with-eval-after-load 'eglot
-	 (add-to-list 'eglot-server-programs
-		      '((java-mode java-ts-mode) . "jdt-language-server")))
+       (use-package eglot-java
+	 :hook ((java-mode . eglot-java-mode)
+		(eglot-java-mode . (lambda ()
+				     (define-key eglot-java-mode (kbd "C-c l n") #'eglot-java-file-new)
+				     (define-key eglot-java-mode (kbd "C-c l x") #'eglot-java-run-main)
+				     (define-key eglot-java-mode (kbd "C-c l t") #'eglot-java-run-test)
+				     (define-key eglot-java-mode (kbd "C-c l N") #'eglot-java-project-new)
+				     (define-key eglot-java-mode (kbd "C-c l T") #'eglot-java-project-build-task)
+				     (define-key eglot-java-mode (kbd "C-c l R") #'eglot-java-project-build-refresh)))))
 
      #+end_src
 **** Clojure
@@ -1424,7 +1432,7 @@
      #+end_src
      
 
-** lsp-client *lsp-mode*
+** COMMENT lsp-client *lsp-mode*
    Better & polished client which work better than current bare bone *eglot*
 
    FIXME Configuration with orderless or corfu as the completion
