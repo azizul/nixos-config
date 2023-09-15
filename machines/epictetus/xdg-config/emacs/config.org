@@ -704,7 +704,7 @@
      (use-package orderless
        :ensure t
        :custom
-       (completion-styles '(orderless basic))
+       (completion-styles '(basic orderless))
        (completion-category-overrides '((file (styles basic partial-completion)))))
    #+end_src
 
