@@ -137,7 +137,8 @@
     elixir # ruby on erlang BEAM
     elixir-ls # lsp for elixir
     nil # nix lsp server
-
+    jdt-language-server # java lsp server
+    
     # internet browsing
     firefox
     vieb

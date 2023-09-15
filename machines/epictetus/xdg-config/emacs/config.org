@@ -1472,3 +1472,38 @@
 
      #+end_src
 
+**** Common Lisp
+***** SLY
+
+      SLIME forked should work better with auto completion; Similar to SLIME this is independent of LSP and DAP.
+      Refer to the following [[https://github.com/joaotavora/sly][link]] for the modification and manual (similar to SLIME but with additional features).
+      #+begin_src emacs-lisp
+	;; SLIME forked version sly with sbcl dialect
+	(use-package sly
+	  :config
+	  (setq inferior-lisp-program "sbcl"))
+      #+end_src
+
+**** Emacs Lisp (elisp)
+***** Another paraedit *lispy*
+
+      Abo-abo package which work well for lisp dialects
+      #+BEGIN_SRC emacs-lisp
+	;; updated version of paredit from abo-abo
+	(use-package lispy
+	  :config
+	  :hook ((emacs-lisp-mode . (lambda ()(lispy-mode 1)))
+		 (lisp-mode . (lambda ()(lispy-mode 1)))))
+	;; need formatter to save time
+	;; (use-package elisp-format); takes to long to format a buffer
+      #+END_SRC
+
+**** Java
+ Uses LSP and DAP and based on JDTLS. THe LSP installed server is at =lsp-java-server-install-dir=
+ variable. To update the server, running =lsp-java-update-server=
+ #+begin_src emacs-lisp 
+   ;; install java jdtls lsp mode
+   (use-package lsp-java
+     :config
+     (add-hook 'java-mode-hook 'lsp))
+ #+end_src
