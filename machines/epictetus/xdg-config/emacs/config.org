@@ -91,6 +91,19 @@
      #+end_src
 
 * Base System Lib Setup
+** COMMENT completion (icomplete)
+   The basic completion depends on the completion style listed in =completion-styles=; by default
+   will match with the initial pattern *basic*, followed by *partial-completion* and then *emacs22*.
+   The similar thing are done in *vertico* but with are more useful with default ocnfiguration.
+   #+begin_src emacs-lisp
+     ;; default icomplete
+     (icomplete-vertical-mode)
+     (setq completion-auto-wrap t
+           completion-auto-select t
+           completion-cycling t
+           completion-show-help nil
+           completion-max-height 15)
+   #+end_src
 ** password store (auth-source-pass)
 
    This is used to pass encrypted password in *pass* program in startup scripts.
