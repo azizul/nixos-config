@@ -1165,7 +1165,7 @@
        :straight (:type built-in ))
    #+end_src
 
-** COMMENT lsp-client *Eglot*
+** lsp-client *Eglot*
    Harder
    Used the build-in eglot library; note the eglot has it's own default programs configured
    #+begin_src emacs-lisp
