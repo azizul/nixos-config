@@ -856,7 +856,7 @@
    major mode provided completion and other suchs tags
 
    Full fledge completion
-   #+begin_src emacs-lisp :tangle no
+   #+begin_src emacs-lisp 
      ;; install company and enable it on global level
      (use-package company
        :config
@@ -864,11 +864,11 @@
    #+end_src
 
    3rd party capf provider backends
-   #+begin_src emacs-lisp
+   #+begin_src emacs-lisp :tangle no
      (use-package company)
    #+end_src
 
-** Code completion (require capf backends) *corfu*
+** COMMENT Code completion (require capf backends) *corfu*
    Since this should be using the main function provider of completion with *cape* providing
    the additional backends adapters and others *company*
    
@@ -915,7 +915,7 @@
 
    #+RESULTS:
 
-** Capf backends *cape*
+** COMMENT Capf backends *cape*
    Add additional capf as well as third party capf backends.
    
    #+begin_src emacs-lisp
@@ -1213,8 +1213,10 @@
      variable. To update the server, running =lsp-java-update-server=
      #+begin_src emacs-lisp 
        ;; install java jdtls lsp mode
-       (use-package lsp-java)
-	 
+       (with-eval-after-load 'eglot
+	 (add-to-list 'eglot-server-programs
+		      '((java-mode java-ts-mode) . "jdt-language-server")))
+
      #+end_src
 **** Clojure
 
@@ -1425,7 +1427,8 @@
 ** lsp-client *lsp-mode*
    Better & polished client which work better than current bare bone *eglot*
 
-   #+begin_src emacs-lisp
+   FIXME Configuration with orderless or corfu as the completion
+   #+begin_src emacs-lisp :tangle no
      ;; configure lsp breadcrumb
      (defun ara/lsp-mode-setup ()
        (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -1445,6 +1448,25 @@
        (lsp-enable-which-key-integration t)
        :hook ((lsp-mode . ara/lsp-mode-setup)
 	      (lsp-completion-mode . my/lsp-mode-setup-completion)))
+
+   #+end_src
+
+   Older working configuration but used with *company*
+   #+begin_src emacs-lisp 
+
+     ;; configure lsp breadcrumb
+     (defun ara/lsp-mode-setup ()
+       (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+       (lsp-headerline-breadcrumb-mode))
+
+     ;; install lsp-mode, set the key binding for the lsp-mode menus
+     (use-package lsp-mode
+       :commands (lsp lsp-deferred)
+       :hook (lsp-mode . ara/lsp-mode-setup)
+       :init
+       (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+       :config
+       (lsp-enable-which-key-integration t))
 
    #+end_src
 
@@ -1468,8 +1490,7 @@
 
       #+end_src
 
-*** lsp-mode debug extension 
-
+*** TODO lsp-mode debug extension 
 *** Language
 **** Nix (system builder)
      #+begin_src emacs-lisp
@@ -1515,3 +1536,4 @@
 	 :hook (java-mode . lsp))
 
      #+end_src
+     
