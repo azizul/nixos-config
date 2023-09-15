@@ -857,7 +857,7 @@
    major mode provided completion and other suchs tags
 
    Full fledge completion
-   #+begin_src emacs-lisp 
+   #+begin_src emacs-lisp :tangle no 
      ;; install company and enable it on global level
      (use-package company
        :config
@@ -866,7 +866,7 @@
 
    3rd party capf provider backends. At the moment this doesn't work for some reason perhaps the
    older configuration using ivy works better.
-   #+begin_src emacs-lisp :tangle no
+   #+begin_src emacs-lisp
      (use-package company)
    #+end_src
 
