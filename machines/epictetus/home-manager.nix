@@ -120,6 +120,7 @@
     zig
     zls
     rustup
+    rust-analyzer
     llvm
     openjdk
     maven
