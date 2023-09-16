@@ -964,6 +964,21 @@
 	(add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
     #+end_src
 
+*** FIXME Move matched completion to minibuffer
+    With *embark* we could process more things with completion such as all the available actions
+    summarized by *embark* (delete file, lsp action?)
+
+    #+begin_src emacs-lisp
+      ;; move completion data to minibuffer for vertico + orderless + embark processing
+      (defun corfu-move-to-minibuffer ()
+	(interactive)
+	(when completion-in-region--data
+	  (let ((completion-extra-properties corfu--extra)
+		completion-cycle-threshold completion-cycling)
+	    (apply #'consult-completion-in-region completion-in-region--data))))
+      (keymap-set corfu-map "M-m" #'corfu-move-to-minibuffer)
+      (add-to-list 'corfu-continue-commands #'corfu-move-to-minibuffer)
+    #+end_src
 *** COMMENT Add inline document to capf listing *corfu-doc*
     this is superceeded by *corfu-popupinfo*, which is a built-in extension by *corfu*
     #+begin_src emacs-lisp
@@ -988,6 +1003,7 @@
     #+end_src
     
 ** Capf backends *cape*
+   Useful [[https://kristofferbalintona.me/posts/202203130102/][blog]] on what is *cape* and how to use it.
 *** main configuration using default cape capf (lsp adds later on)
    Add additional capf as well as third party capf backends could be added; but for basic programming
    we could just use cape capf and with lsp completion (lsp-mode or eglot)
@@ -1639,11 +1655,11 @@
        (use-package elixir-mode)
      #+end_src
      
-
 ** lsp-client *lsp-mode*
    Better & polished client which work better than current bare bone *eglot*
-
-   FIXME Configuration with orderless or corfu as the completion
+   
+*** main configuration
+**** Configuration with corfu-cape capfs as the completion
    #+begin_src emacs-lisp
      ;; configure lsp breadcrumb
      (defun ara/lsp-mode-setup ()
@@ -1667,7 +1683,7 @@
 
    #+end_src
 
-   Older working configuration but used with *company*
+**** COMMENT Older working configuration but used with *company*
    #+begin_src emacs-lisp :tangle no
 
      ;; configure lsp breadcrumb
