@@ -890,15 +890,16 @@
 	:custom
 	(corfu-auto-prefix 2)       ;; min number of completion
 	(corfu-auto-delay 0.25)     ;; 
-	(corfu-count 14)
-	(corfu-preselect-first t)   ;; auto select first match
+	(corfu-count 10)
+	(corfu-preselect 'prompt)   ;; auto select first match
 	(corfu-scroll-margin 4)
 	(corfu-echo-documentation t)
 	(corfu-cycle nil)                ;; Enable cycling for `corfu-next/previous'
 	(corfu-auto nil)                 ;; Enable auto completion
 	(corfu-separator ?\s)          ;; Orderless field separator
 	(corfu-quit-at-boundary nil)   ;; Never quit at completion boundary; used with orderless
-	;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+	(corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+	(corfu-max-width 80)  ;; max width in characters
 	;; (corfu-preview-current nil)    ;; Disable current candidate preview
 	;; (corfu-preselect 'prompt)      ;; Preselect the prompt
 	;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
@@ -915,6 +916,8 @@
 	:init
 	(global-corfu-mode)
 	:config
+	;; configure popup documentation
+	(setq corfu-popupinfo-max-width 70)
 	(corfu-popupinfo-mode))
 
       ;; A few more useful configurations...
