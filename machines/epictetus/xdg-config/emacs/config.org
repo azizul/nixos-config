@@ -543,6 +543,14 @@
        (smartparens-global-mode))
    #+end_src
 
+** generic keybind *general*
+   Provides use-package option =:general=; currently referred in *corfu-doc* package for binding the
+   keymap for inline capf documentation.
+   
+   #+begin_src emacs-lisp
+     ;; use the generic keybinding library
+     (use-package general)
+   #+end_src
 ** minibuffer tags/info *marginalia*
    this is useful package to expand notes on minibuffer; used with *vertico* and *embark*
    #+begin_src emacs-lisp
