@@ -1526,7 +1526,7 @@
      *eglot* has some default configuration; seems to work fast enough
 
 **** Rust
-
+     
      Depends on the tree-sitter for syntax highlighting and LSP for advanced options
      #+begin_src emacs-lisp
        ;; add rust + lsp
@@ -1769,3 +1769,28 @@
 
      #+end_src
      
+**** Zig
+     Simple installation of getting the binary compiler and placing it in the =PATH=. Once installed
+     we can build the lsp server made from Zig =zls= and using the integration with =lsp-mode=
+     package.
+     - zls :: Get the source code and build it using git; see [[https://github.com/zigtools/zls][link]]
+     - zig-mode :: Zig major mode for syntax highlighting
+       #+begin_src emacs-lisp
+	 ;; install main mode with lsp integrated with zls
+	 (use-package zig-mode
+	   :hook (zig-mode . lsp))
+       #+end_src
+       
+**** Rust
+     Depends on the tree-sitter for syntax highlighting and LSP for advanced options.
+
+     With nixos we'll have to add =rust-analyzer= to our build script, apart from =rustup= binary.
+     #+begin_src emacs-lisp
+       ;; add rust + lsp
+       (use-package rust-mode
+	 :hook ((rust-mode . (lambda ()(setq indent-tabs-mode nil)))
+		(rust-mode . (lambda ()(prettify-symbols-mode)))
+		(rust-mode . lsp))
+	 :config
+	 (setq rust-format-on-save t))
+     #+end_src
