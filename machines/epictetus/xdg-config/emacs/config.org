@@ -881,6 +881,8 @@
 ** Code completion (require capf backends) *corfu*
    Since this should be using the main function provider of completion with *cape* providing
    the additional backends adapters and others *company*
+
+*** Main package configuration   
    
    #+begin_src emacs-lisp
      (use-package corfu
@@ -943,6 +945,42 @@
 
    #+RESULTS:
 
+*** Add icon to capf listing *kind-icon*
+    #+begin_src emacs-lisp
+      ;; add the icon for the capf listing
+      (use-package kind-icon
+	:after corfu
+	:custom
+	(kind-icon-use-icons t)
+	(kind-icon-default-face 'corfu-default)
+	(kind-icon-blend-background nil)
+	(kind-icon-blend-frac 0.8)
+	:config
+	(add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+    #+end_src
+
+*** Add inline document to capf listing *corfu-doc*
+    #+begin_src emacs-lisp
+      ;; add inline doc for the capf listing
+      ;; FIXME move to melpa when its there
+      (use-package corfu-doc
+	:straight (corfu-doc :type git :host github :repo "galeo/corfu-doc")
+	:after corfu
+	:hook (corfu-mode . corfu-doc-mode)
+	:general (:keymap 'corfu-map
+			  ;; this is the manual toggle for documentation popup
+			  [remap corfu-show-documentation] #'corfu-doc-toggle	; remap default doc command
+			  ;; scroll in documentation window
+			  "M-n" #'corfu-doc-scroll-up
+			  "M-p" #'corfu-doc-scroll-down)
+	:custom
+	(corfu-doc-delay 0.5)
+	;; (corfu-doc-max-width 70)
+	;; (corfu-doc-max-height 20)
+	(corfu-echo-documentation nil))
+
+    #+end_src
+    
 ** Capf backends *cape*
 *** main configuration using default cape capf (lsp adds later on)
    Add additional capf as well as third party capf backends could be added; but for basic programming
