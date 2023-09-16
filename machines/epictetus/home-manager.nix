@@ -247,8 +247,8 @@
   # enable git and set the configuration
   programs.git = {
     enable = true;
-    userName = "${username}";
-    userEmail = "${fullname}";
+    userName = "${fullname}";
+    userEmail = "${email}";
   };
 
   # enable zsh and extra configs
