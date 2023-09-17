@@ -1201,6 +1201,44 @@
    #+end_src
 
 * Documents
+** gemini protocol *elder*
+   Really simple web based internet site on protocol; control are simple and concise shown below
+   taken from the start page or pressing =U=. Note this is a special buffer, so meow mode is on the
+   motion state.
+
+ - TAB/Shift-TAB: next/prev item on current page
+ - RET/mouse-1: open item under cursor
+ - m: select an item on current page by name (autocompletes)
+ - u/mouse-3/U: return to previous page or to the start page
+ - g: go to a particular address (gopher, gemini, finger)
+ - o/O: open a different address selector or the root menu of the current server
+ - d/D: download item under cursor or current page
+ - i/I: info on item under cursor or current page
+ - c/C: copy URL representation of item under cursor or current page
+ - a/A: bookmark the item under cursor or current page
+ - B: list all bookmarks
+ - s/S: show current history stack or all previously visted pages
+ - r: redraw current page (using cached contents if available)
+ - R: reload current page (regenerates cache)
+ - !: set character coding system for gopher (default is to autodetect)
+ - T: toggle TLS gopher mode
+ - F: forget/discard current TLS client certificate
+ - .: display the raw server response for the current page
+   
+   #+Begin_src emacs-lisp
+     ;; load gemini client
+     (use-package elpher)
+   #+end_src
+** rss feed reader *elfeed*
+   We'll used this to consume the web things since the www is too *commercialized*
+   #+begin_src emacs-lisp
+     ;; install the news reader and the associated link
+     (use-package elfeed
+       :config
+       (setq elfeed-feeds
+	     '("https://feeds.feedburner.com/TheHackersNews"
+	       "https://www.rt.com/rss-feed/")))
+   #+end_src
 ** pdf *pdf-tools*
    After installation, need to run =(pdf-tools-install)= which will built the server it connects to.
    With *nixos* this will download the built dependencies automatically and built the server binary.
