@@ -5,7 +5,7 @@
 
 * Building emacs
   The following are the thing need to build the running emacs on operationg systems
-
+  
 ** Debian 13 (trixie-sid)
    # wayland integration for vim, emacs etc
    sudo apt install wl-clipboard
@@ -467,25 +467,38 @@
    #+end_src
 
 *** text menu *ara-map t*
-    Move simple command using keymap with this
+    A conglomerate of useful package functions; Note that the packages should exist for this to work
+    correctly!
+    
     #+begin_src emacs-lisp
       ;; short menu for manipulating/searching/jumping  text
       (defhydra hydra-text-menu (:color red :hint nil)
-	"text menu "
-	("c l" avy-copy-line "copy line")
-	("c r" avy-copy-region "copy region")
-	("k l" avy-kill-whole-line "delete line")
-	("k r" avy-kill-region "delete region")
-	("k L" avy-kill-ring-save-whole-line "kill line")
-	("k R" avy-kill-ring-save-region "kill region")
-	("g c" avy-goto-char "jump to character")
-	("g w" avy-goto-word-0 "jump to word")
-	("g l" avy-goto-line "jump to line")
-	("r f" elfeed "read feed")
-	("r g" elpher "read gemini site")
-	("q" nil))
+	"
+      ^Text^               ^Jump^           ^Search^           ^Goto
+      ^^^^^^-----------------------------------------------------------------
+      _cl_: Copy line      _gc_: Character _sl_: buffer        _rf_: Read news
+      _cr_: Copy region    _gw_: Word      _sp_: project       _rg_: Read gemini site
+      _kl_: Delete line    _gl_: Line
+      _kr_: Delete region
+      _kL_: Kill line
+      _kR_: Kill region
+      "
+	("cl" avy-copy-line)
+	("cr" avy-copy-region)
+	("kl" avy-kill-whole-line)
+	("kr" avy-kill-region)
+	("kL" avy-kill-ring-save-whole-line)
+	("kR" avy-kill-ring-save-region)
+	("gc" avy-goto-char)
+	("gw" avy-goto-word-0)
+	("gl" avy-goto-line)
+	("sl" consult-line)
+	("sp" consult-git-grep)
+	("rf" elfeed)
+	("rg" elpher)
+	("q" nil "Quit" :color blue))
 
-      (define-key ara-map "t" 'hydra-text-menu)
+      (define-key ara-map "t" 'hydra-text-menu/body)
     #+end_src
 
     #+RESULTS:
@@ -498,19 +511,22 @@
       (defhydra hydra-window (:color red
 				     :hint nil)
 	"
-       Split: _v_ert _x_:horz
-      Delete: _o_nly  _da_ce  _dw_indow  _db_uffer  _df_rame
-	Move: _s_wap
-      Frames: _f_rame new  _df_ delete
-	Misc: _m_ark _a_ce  _u_ndo  _r_edo"
+      Windows management
+      ------------------
+      ^Movement^              ^Split^                   ^Delete^
+      ^^^^^^^^^^-----------------------------------------------------
+      _h_: move left          _v_: vertical right       _o_: other window
+      _j_: move down          _x_: horizontal below     _da_: select window
+      _k_: move up            _|_: vertical move right  _dw_: current window
+      _l_: move right         ___: horizontal move down _db_: current buffer
+      _a_: select window      ^ ^ ^                     _df_: frame
+      _s_: swap select window
+      _f_: new frame"
+	
 	("h" windmove-left)
 	("j" windmove-down)
 	("k" windmove-up)
 	("l" windmove-right)
-	("H" hydra-move-splitter-left)
-	("J" hydra-move-splitter-down)
-	("K" hydra-move-splitter-up)
-	("L" hydra-move-splitter-right)
 	("|" (lambda ()
 	       (interactive)
 	       (split-window-right)
@@ -521,10 +537,6 @@
 	       (windmove-down)))
 	("v" split-window-right)
 	("x" split-window-below)
-					      ;("t" transpose-frame "'")
-	;; winner-mode must be enabled
-	("u" winner-undo)
-	("r" winner-redo) ;;Fixme, not working?
 	("o" delete-other-windows :exit t)
 	("a" ace-window :exit t)
 	("f" new-frame :exit t)
@@ -533,12 +545,9 @@
 	("dw" delete-window)
 	("db" kill-this-buffer)
 	("df" delete-frame :exit t)
-	("q" nil)
-					      ;("i" ace-maximize-window "ace-one" :color blue)
-					      ;("b" ido-switch-buffer "buf")
-	("m" headlong-bookmark-jump))
+	("q" nil))
 
-      (define-key ara-map "w" 'hydra-text-menu)
+      (define-key ara-map "w" 'hydra-window/body)
     #+end_src
 
 ** Git *magit*
