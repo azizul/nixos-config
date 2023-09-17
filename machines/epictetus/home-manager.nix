@@ -120,13 +120,16 @@
     zig
     zls
     rustup
-    rust-analyzer
+    #rustc
+    #cargo
+    #rust-analyzer
     llvm
     openjdk
     maven
     gradle
     go
-    clojure
+    clojure # clojure repl
+    clojure-lsp # lsp server for clojure
     leiningen # clojure build tools
     ghc # haskell compiler
     opam # ocaml package manager
