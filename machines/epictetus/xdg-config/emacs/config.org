@@ -434,22 +434,27 @@
 
    Useful utility are included by *lispy*, however we'll use the jumping to text capability and
    copying based on the same jump/hop mark.
+
    #+begin_src emacs-lisp
-     (use-package avy
-       :config
-       ;; commonly used
-       (global-set-key (kbd "C-:") 'avy-goto-char-timer)
-       ;; less frequently used
-       (define-key 'ara-map (kbd "g l") 'avy-goto-line)
-       (define-key 'ara-map (kbd "g w") 'avy-goto-word-0)
-       (define-key 'ara-map (kbd "g c") 'avy-goto-char)
-       (define-key 'ara-map (kbd "c l") 'avy-copy-line)
-       (define-key 'ara-map (kbd "c r") 'avy-copy-region)
-       (define-key 'ara-map (kbd "k l") 'avy-kill-whole-line)
-       (define-key 'ara-map (kbd "k r") 'avy-kill-region)
-       (define-key 'ara-map (kbd "k L") 'avy-kill-ring-save-whole-line)
-       (define-key 'ara-map (kbd "k R") 'avy-kill-ring-save-region))
+     (use-package avy)
+     ;; commonly used
+     (global-set-key (kbd "C-:") 'avy-goto-char-timer)
    #+end_src
+   
+*** other keybinding with *ara-map*
+    Uses *hydra* since that would be useful text menu display than nested keymap keys.
+    #+begin_src emacs-lisp :tangle no
+      ;; less frequently used
+      (define-key 'ara-map (kbd "g l") 'avy-goto-line)
+      (define-key 'ara-map (kbd "g w") 'avy-goto-word-0)
+      (define-key 'ara-map (kbd "g c") 'avy-goto-char)
+      (define-key 'ara-map (kbd "c l") 'avy-copy-line)
+      (define-key 'ara-map (kbd "c r") 'avy-copy-region)
+      (define-key 'ara-map (kbd "k l") 'avy-kill-whole-line)
+      (define-key 'ara-map (kbd "k r") 'avy-kill-region)
+      (define-key 'ara-map (kbd "k L") 'avy-kill-ring-save-whole-line)
+      (define-key 'ara-map (kbd "k R") 'avy-kill-ring-save-region)
+    #+end_src
 
 ** regex search *swiper*
 
@@ -465,8 +470,8 @@
      ;; load -hydra
      (use-package hydra)
    #+end_src
-
-*** text menu *ara-map t*
+   
+*** text menu [ara-map t]
     A conglomerate of useful package functions; Note that the packages should exist for this to work
     correctly!
     
@@ -474,6 +479,8 @@
       ;; short menu for manipulating/searching/jumping  text
       (defhydra hydra-text-menu (:color red :hint nil)
 	"
+      [General text]
+      
       ^Text^               ^Jump^           ^Search^           ^Goto
       ^^^^^^-----------------------------------------------------------------
       _cl_: Copy line      _gc_: Character _sl_: buffer        _rf_: Read news
@@ -496,7 +503,7 @@
 	("sp" consult-git-grep)
 	("rf" elfeed)
 	("rg" elpher)
-	("q" nil "Quit" :color blue))
+	("q" nil))
 
       (define-key ara-map "t" 'hydra-text-menu/body)
     #+end_src
@@ -504,22 +511,22 @@
     #+RESULTS:
     : hydra-text-menu
 
-*** windows management *ara-map w*
+*** windows management [ara-map w]
     Use wiki example for handling windows movement
     #+begin_src emacs-lisp
       ;; use hydra to manage windows
       (defhydra hydra-window (:color red
 				     :hint nil)
 	"
-      Windows management
-      ------------------
-      ^Movement^              ^Split^                   ^Delete^
+      [Windows management]
+      
+      ^Movement^              ^Split^                   ^Delete
       ^^^^^^^^^^-----------------------------------------------------
-      _h_: move left          _v_: vertical right       _o_: other window
+      _h_: move left          _v_: vertical right        _o_: other window
       _j_: move down          _x_: horizontal below     _da_: select window
       _k_: move up            _|_: vertical move right  _dw_: current window
       _l_: move right         ___: horizontal move down _db_: current buffer
-      _a_: select window      ^ ^ ^                     _df_: frame
+      _a_: select window      ^^^                       _df_: frame
       _s_: swap select window
       _f_: new frame"
 	
@@ -550,6 +557,39 @@
       (define-key ara-map "w" 'hydra-window/body)
     #+end_src
 
+*** lsp-mode management [ara-map l]
+    Defined better organization of menu for lsp-mode use
+    #+begin_src emacs-lisp
+      ;; add the lsp-mode hydra menu shortcuts
+      (defhydra hydra-lsp (:exit t :hint nil)
+	"
+      [lsp-mode commands] 
+   
+       Buffer^^               Server^^                   Symbol
+      -------------------------------------------------------------------------------------
+       _f_: format           _M-r_: restart            _d_: declaration  _i_: implementation  _o_: documentation
+       _m_: imenu            _S_  : shutdown           _D_: definition   _t_: type            _r_: rename
+       _x_: execute action   _M-s_: describe session   _R_: references   _s_: signature"
+	("d" lsp-find-declaration)
+	("D" lsp-ui-peek-find-definitions)
+	("R" lsp-ui-peek-find-references)
+	("i" lsp-ui-peek-find-implementation)
+	("t" lsp-find-type-definition)
+	("s" lsp-signature-help)
+	("o" lsp-describe-thing-at-point)
+	("r" lsp-rename)
+
+	("f" lsp-format-buffer)
+	("m" lsp-ui-imenu)
+	("x" lsp-execute-code-action)
+
+	("M-s" lsp-describe-session)
+	("M-r" lsp-restart-workspace)
+	("S" lsp-shutdown-workspace))
+
+      (define-key ara-map "l" 'hydra-lsp/body)
+
+    #+end_src
 ** Git *magit*
 
    Commonly used distributed SCM, useful for tracking file changes, use =C-x g= to get the magit
