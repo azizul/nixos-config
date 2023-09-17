@@ -1797,6 +1797,33 @@
 	;; (use-package elisp-format); takes to long to format a buffer
       #+END_SRC
 
+**** Clojure
+***** using clojure-mode & cider
+     For steps is to include the major mode editing for clojure files; this is is using [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]
+     #+begin_src emacs-lisp
+       ;; major mode for clojure editing
+       (use-package clojure-mode)
+     #+end_src
+
+     Then we include the interactive development package using [[https://cider.mx/][cider]] which should gave us similar
+     editing like common-lisp and sly integration.
+     #+begin_src emacs-lisp
+       ;; clojure interactive development
+       (use-package cider)
+     #+end_src
+
+***** COMMENT using clojure-mode & clojure-lsp
+      Unlike *cider* which is using repl like development; this uses more imperative way of doing
+      things.
+      #+begin_src emacs-lisp
+	;; clojure mode + clojure-lsp binary installed
+	(use-package clojure-mode
+	  :hook ((clojure-mode . lsp)
+		 (clojurec-mode . lsp)
+		 (clojurescript-mode . lsp)))
+
+      #+end_src
+
 **** Java
      Uses LSP and DAP and based on JDTLS. THe LSP installed server is at =lsp-java-server-install-dir=
      variable. To update the server, running =lsp-java-update-server=
