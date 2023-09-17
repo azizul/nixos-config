@@ -107,7 +107,7 @@
 ** spelling correction *ispell*
    The first is to install the program *hunspell* which for nixos is quite straight forward as well
    as the dictinaries under the package =hunspellDicts.xxx= in the repositories.
-   
+
    #+begin_src emacs-lisp
      ;; set the hunspell as the default program
      (setq ispell-program-name "hunspell")
@@ -124,7 +124,7 @@
    #+begin_src sh :results output :tangle no
      pass
    #+end_src
-   
+
    #+RESULTS:
    : Password Store
    : └── main.gmail
@@ -402,7 +402,7 @@
     #+begin_src emacs-lisp :tangle no
       (eval (all-the-icons-install-fonts))
     #+end_src
-    
+
 *** The main theme
     We'll use the doom megapack for this
     #+begin_src emacs-lisp
@@ -428,8 +428,119 @@
 	(setq doom-modeline-workspace-name t)
 	(display-time-mode))
     #+end_src
-    
+
 * General utility
+** jump/hop/util *avy*
+
+   Useful utility are included by *lispy*, however we'll use the jumping to text capability and
+   copying based on the same jump/hop mark.
+   #+begin_src emacs-lisp
+     (use-package avy
+       :config
+       ;; commonly used
+       (global-set-key (kbd "C-:") 'avy-goto-char-timer)
+       ;; less frequently used
+       (define-key 'ara-map (kbd "g l") 'avy-goto-line)
+       (define-key 'ara-map (kbd "g w") 'avy-goto-word-0)
+       (define-key 'ara-map (kbd "g c") 'avy-goto-char)
+       (define-key 'ara-map (kbd "c l") 'avy-copy-line)
+       (define-key 'ara-map (kbd "c r") 'avy-copy-region)
+       (define-key 'ara-map (kbd "k l") 'avy-kill-whole-line)
+       (define-key 'ara-map (kbd "k r") 'avy-kill-region)
+       (define-key 'ara-map (kbd "k L") 'avy-kill-ring-save-whole-line)
+       (define-key 'ara-map (kbd "k R") 'avy-kill-ring-save-region))
+   #+end_src
+
+** regex search *swiper*
+
+   The package are included by *lispy* and its useful.
+   #+begin_src emacs-lisp
+     (use-package swiper
+       :config
+       (define-key 'ara-map (kbd "s") 'swiper))
+   #+end_src
+
+** Cleaner key-binding menu *hydra*
+   #+begin_src emacs-lisp
+     ;; load -hydra
+     (use-package hydra)
+   #+end_src
+
+*** text menu *ara-map t*
+    Move simple command using keymap with this
+    #+begin_src emacs-lisp
+      ;; short menu for manipulating/searching/jumping  text
+      (defhydra hydra-text-menu (:color red :hint nil)
+	"text menu "
+	("c l" avy-copy-line "copy line")
+	("c r" avy-copy-region "copy region")
+	("k l" avy-kill-whole-line "delete line")
+	("k r" avy-kill-region "delete region")
+	("k L" avy-kill-ring-save-whole-line "kill line")
+	("k R" avy-kill-ring-save-region "kill region")
+	("g c" avy-goto-char "jump to character")
+	("g w" avy-goto-word-0 "jump to word")
+	("g l" avy-goto-line "jump to line")
+	("r f" elfeed "read feed")
+	("r g" elpher "read gemini site")
+	("q" nil))
+
+      (define-key ara-map "t" 'hydra-text-menu)
+    #+end_src
+
+    #+RESULTS:
+    : hydra-text-menu
+
+*** windows management *ara-map w*
+    Use wiki example for handling windows movement
+    #+begin_src emacs-lisp
+      ;; use hydra to manage windows
+      (defhydra hydra-window (:color red
+				     :hint nil)
+	"
+       Split: _v_ert _x_:horz
+      Delete: _o_nly  _da_ce  _dw_indow  _db_uffer  _df_rame
+	Move: _s_wap
+      Frames: _f_rame new  _df_ delete
+	Misc: _m_ark _a_ce  _u_ndo  _r_edo"
+	("h" windmove-left)
+	("j" windmove-down)
+	("k" windmove-up)
+	("l" windmove-right)
+	("H" hydra-move-splitter-left)
+	("J" hydra-move-splitter-down)
+	("K" hydra-move-splitter-up)
+	("L" hydra-move-splitter-right)
+	("|" (lambda ()
+	       (interactive)
+	       (split-window-right)
+	       (windmove-right)))
+	("_" (lambda ()
+	       (interactive)
+	       (split-window-below)
+	       (windmove-down)))
+	("v" split-window-right)
+	("x" split-window-below)
+					      ;("t" transpose-frame "'")
+	;; winner-mode must be enabled
+	("u" winner-undo)
+	("r" winner-redo) ;;Fixme, not working?
+	("o" delete-other-windows :exit t)
+	("a" ace-window :exit t)
+	("f" new-frame :exit t)
+	("s" ace-swap-window)
+	("da" ace-delete-window)
+	("dw" delete-window)
+	("db" kill-this-buffer)
+	("df" delete-frame :exit t)
+	("q" nil)
+					      ;("i" ace-maximize-window "ace-one" :color blue)
+					      ;("b" ido-switch-buffer "buf")
+	("m" headlong-bookmark-jump))
+
+      (define-key ara-map "w" 'hydra-text-menu)
+    #+end_src
+
 ** Git *magit*
 
    Commonly used distributed SCM, useful for tracking file changes, use =C-x g= to get the magit
@@ -501,36 +612,6 @@
 
    #+end_src
 
-** regex search *swiper*
-
-   The package are included by *lispy* and its useful.
-   #+begin_src emacs-lisp
-     (use-package swiper
-       :config
-       (define-key 'ara-map (kbd "s") 'swiper))
-   #+end_src
-
-** jump/hop/util *avy*
-
-   Useful utility are included by *lispy*, however we'll use the jumping to text capability and
-   copying based on the same jump/hop mark.
-   #+begin_src emacs-lisp
-     (use-package avy
-       :config
-       ;; commonly used
-       (global-set-key (kbd "C-:") 'avy-goto-char-timer)
-       ;; less frequently used
-       (define-key 'ara-map (kbd "g l") 'avy-goto-line)
-       (define-key 'ara-map (kbd "g w") 'avy-goto-word-0)
-       (define-key 'ara-map (kbd "g c") 'avy-goto-char)
-       (define-key 'ara-map (kbd "c l") 'avy-copy-line)
-       (define-key 'ara-map (kbd "c r") 'avy-copy-region)
-       (define-key 'ara-map (kbd "k l") 'avy-kill-whole-line)
-       (define-key 'ara-map (kbd "k r") 'avy-kill-region)
-       (define-key 'ara-map (kbd "k L") 'avy-kill-ring-save-whole-line)
-       (define-key 'ara-map (kbd "k R") 'avy-kill-ring-save-region))
-   #+end_src
-
 ** surround eqivalent *smart-parent*
    Add to the personal keymap to process *surround* function to remove the surround char/tag;
    To surround the data, just highlight and add it again.
@@ -546,7 +627,7 @@
 ** generic keybind *general*
    Provides use-package option =:general=; currently referred in *corfu-doc* package for binding the
    keymap for inline capf documentation.
-   
+
    #+begin_src emacs-lisp
      ;; use the generic keybinding library
      (use-package general)
@@ -594,7 +675,7 @@
    #+end_src
 
    Adding integration with *which-key* which exclude the default indicator =embark-verbose-indicator=
-   and =embark-mixed-indicator= with the following =embark-which-key-indicator=. 
+   and =embark-mixed-indicator= with the following =embark-which-key-indicator=.
    #+begin_src emacs-lisp
      (defun embark-which-key-indicator ()
        "An embark indicator that displays keymaps using which-key.
@@ -645,7 +726,7 @@
    #+end_src
 
    #+RESULTS:
-   
+
 ** narrowing list *vertico*
    The newest stuff doesn't work well
    ;; code and paste from the [[https://github.com/minad/vertico#configuration][url]]
@@ -874,7 +955,7 @@
 
    3rd party capf provider backends. At the moment this doesn't work for some reason perhaps the
    older configuration using ivy works better.
-   #+begin_src emacs-lisp 
+   #+begin_src emacs-lisp
      (use-package company)
    #+end_src
 
@@ -882,14 +963,14 @@
    Since this should be using the main function provider of completion with *cape* providing
    the additional backends adapters and others *company*
 
-*** Main package configuration   
-   
+*** Main package configuration
+
     #+begin_src emacs-lisp
       (use-package corfu
 	;; Optional customizations
 	:custom
 	(corfu-auto-prefix 2)       ;; min number of completion
-	(corfu-auto-delay 0.25)     ;; 
+	(corfu-auto-delay 0.25)     ;;
 	(corfu-count 10)
 	(corfu-preselect 'prompt)   ;; auto select first match
 	(corfu-scroll-margin 4)
@@ -1001,13 +1082,13 @@
 	(corfu-echo-documentation nil))
 
     #+end_src
-    
+
 ** Capf backends *cape*
    Useful [[https://kristofferbalintona.me/posts/202203130102/][blog]] on what is *cape* and how to use it.
 *** main configuration using default cape capf (lsp adds later on)
    Add additional capf as well as third party capf backends could be added; but for basic programming
    we could just use cape capf and with lsp completion (lsp-mode or eglot)
-   
+
    #+begin_src emacs-lisp
      ;; capf corfu provider and add from 3rd party
      (use-package cape
@@ -1052,7 +1133,7 @@
 
    #+RESULTS:
    : cape-rfc1345
-*** Add the 3rd party capf provider   
+*** Add the 3rd party capf provider
    We could use company backend with cape-company-capf adapter for the missing
    #+begin_src emacs-lisp :tangle no
      ;; convert company backend to capf
@@ -1068,7 +1149,7 @@
 			       #'company-gtags)))
    #+end_src
 
-*** Using cape, 3rd party capf and manually build provider   
+*** Using cape, 3rd party capf and manually build provider
    We could also write specific capf for each major mode, as shown in example below
 
    #+begin_src emacs-lisp :tangle no
@@ -1224,7 +1305,7 @@
  - T: toggle TLS gopher mode
  - F: forget/discard current TLS client certificate
  - .: display the raw server response for the current page
-   
+
    #+Begin_src emacs-lisp
      ;; load gemini client
      (use-package elpher)
@@ -1428,7 +1509,7 @@
    better documentation and UI layout; i.e. =lsp-java= vs =eglot-java= where the former has better
    documentation support and the latter only allow auto-complete to work; both allow nixos use by
    allowing lsp server to be downloaded into emacs folders.
-   
+
    Used the build-in eglot library; note the eglot has it's own default programs configured
    #+begin_src emacs-lisp
      (use-package eglot
@@ -1475,7 +1556,7 @@
 **** Java
      Uses LSP and DAP and based on JDTLS. THe LSP installed server is at =lsp-java-server-install-dir=
      variable. To update the server, running =lsp-java-update-server=
-     #+begin_src emacs-lisp 
+     #+begin_src emacs-lisp
        ;; install java jdtls lsp mode
        (use-package eglot-java
 	 :hook ((java-mode . eglot-java-mode)
@@ -1564,7 +1645,7 @@
      *eglot* has some default configuration; seems to work fast enough
 
 **** Rust
-     
+
      Depends on the tree-sitter for syntax highlighting and LSP for advanced options
      #+begin_src emacs-lisp
        ;; add rust + lsp
@@ -1663,7 +1744,7 @@
        ;; erlang major mode
        (use-package erlang)
      #+end_src
-   
+
 **** Elixir
      Once setup has bee done to update the latest =apt= repository from =Erlang Solutions=, we can
      install elixir via following command.
@@ -1692,10 +1773,10 @@
        ;; add elixir major mode with elixir-ls on path
        (use-package elixir-mode)
      #+end_src
-     
+
 ** lsp-client *lsp-mode*
    Better & polished client which work better than current bare bone *eglot*
-   
+
 *** main configuration
 **** Configuration with corfu-cape capfs as the completion
    #+begin_src emacs-lisp
@@ -1747,10 +1828,10 @@
 
     - lsp-ui-sidelines :: virtual text on right hand side
     - lsp-ui-peek :: peek references
-    - lsp-ui-doc :: pop-up or windows menu 
+    - lsp-ui-doc :: pop-up or windows menu
     - lsp-ui-imenu :: similar to treemacs side view outline
 
-      #+begin_src emacs-lisp 
+      #+begin_src emacs-lisp
 
 	;; enhancement to lsp-mode ui
 	(use-package lsp-ui
@@ -1760,7 +1841,7 @@
 
       #+end_src
 
-*** TODO lsp-mode debug extension 
+*** TODO lsp-mode debug extension
 *** Language
 **** Nix (system builder)
      #+begin_src emacs-lisp
@@ -1827,13 +1908,13 @@
 **** Java
      Uses LSP and DAP and based on JDTLS. THe LSP installed server is at =lsp-java-server-install-dir=
      variable. To update the server, running =lsp-java-update-server=
-     #+begin_src emacs-lisp 
+     #+begin_src emacs-lisp
        ;; install java jdtls lsp mode
        (use-package lsp-java
 	 :hook (java-mode . lsp))
 
      #+end_src
-     
+
 **** Zig
      Simple installation of getting the binary compiler and placing it in the =PATH=. Once installed
      we can build the lsp server made from Zig =zls= and using the integration with =lsp-mode=
@@ -1845,7 +1926,7 @@
 	 (use-package zig-mode
 	   :hook (zig-mode . lsp))
        #+end_src
-       
+
 **** TODO Rust
      Depends on the tree-sitter for syntax highlighting and LSP for advanced options.
 
