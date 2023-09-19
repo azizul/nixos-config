@@ -267,9 +267,19 @@
     userEmail = "${email}";
   };
 
+  # keychain program
+  programs.keychain = {
+    enable = true;
+    enableZshIntegration = true;
+    agents = [ "ssh" ];
+    keys = [ "id_ed25519" ];
+  };
+  
   # enable zsh and extra configs
   programs.zsh = {
     enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
     shellAliases = {
       ll = "ls -l";
       emacsd = "emacs --daemon";
@@ -288,8 +298,6 @@
     };
     initExtra =
       ''
-      # for session ssh key keychain
-      eval `keychain --eval --agents ssh id_ed25519`
       # ocaml opam
       eval $(opam env)
       '';
