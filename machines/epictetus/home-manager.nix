@@ -282,20 +282,27 @@
     enableCompletion = true;
     shellAliases = {
       ll = "ls -l";
+
+    };
+    
+    shellGlobalAliases = {
       emacsd = "emacs --daemon";
       emacsc = "emacsclient -c";
       emacsk = "emacsclient -e \"(kill-emacs)\"";
       emacsb = "emacs --batch -l org config.org -f org-babel-tangle";
     };
+    
     history = {
       size = 1000;
       path =  "${config.xdg.dataHome}/zsh/history";
     };
+    
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "thefuck" ];
       theme = "robbyrussell";
     };
+    
     initExtra =
       ''
       # ocaml opam
