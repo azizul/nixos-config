@@ -123,6 +123,7 @@
     # Wayland & hyprland
     wev # event viewer for binding keys
     hyprland # dynamic tilling wayland compositor
+    hyprpaper # use to manage desktop wallpaper
     xwayland # X server for interfacing X11 apps and Wayland protocols
     cliphist # wayland clipboard manager
     rofi-wayland # windows switcher, run dialog and dmenu for Wayland
