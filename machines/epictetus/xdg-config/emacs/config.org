@@ -1976,7 +1976,7 @@
 	   :hook (zig-mode . lsp))
        #+end_src
 
-**** TODO Rust
+**** Rust
      Depends on the tree-sitter for syntax highlighting and LSP for advanced options.
 
      With nixos we'll have to add =rust-analyzer= to our build script, and remove =rustup= binary.
