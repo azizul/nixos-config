@@ -100,6 +100,7 @@
     xfce.tumbler # xfce D-bus thumbnailer service
     xautolock # launch program when x timed out
     bibata-cursors # material based cursor theme
+    pywal # generate color scheme based on wallpaper
     
     # git TUI
     lazygit # simple TUI for git
