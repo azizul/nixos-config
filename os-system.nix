@@ -67,7 +67,7 @@
     git
     curl
     udev # system & service manager
-    pkgconfig # tool to search other package info
+    pkg-config # tool to search other package info
     yad # gui dialog tool for shell scripts
 
     # System application distribution
