@@ -119,9 +119,15 @@
     gnome.gdm # program that manages graphical display servers and user logins
 
     # Wayland & hyprland
+    dunst # notification daemon
+    slurp # select a region in wayland compositor
+    grim # grab image from wayland compositor
     wev # event viewer for binding keys
+    swaylock-effects # screen lock for wayland
+    wlogout # wayland based logout menu
     hyprland # dynamic tilling wayland compositor
     hyprpaper # use to manage desktop wallpaper
+    swww # animated wallpaper daemon for hyprland
     xwayland # X server for interfacing X11 apps and Wayland protocols
     cliphist # wayland clipboard manager
     rofi-wayland # windows switcher, run dialog and dmenu for Wayland

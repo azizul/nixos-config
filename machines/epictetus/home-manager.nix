@@ -76,6 +76,8 @@
     cmake # cross-platform system generator; for emacs vterm build
     libtool # generic support script; for emacs vterm build
     ispell # linux interactive spelling tool
+    figlet # make large letters
+    pfetch # pretty system information tool
     
     hunspell # updated ispell spelling tool
     hunspellDicts.en_US
@@ -95,7 +97,10 @@
     # file browser
     mc # midnight commander
     xfce.thunar # xfce file manager
-
+    xfce.tumbler # xfce D-bus thumbnailer service
+    xautolock # launch program when x timed out
+    bibata-cursors # material based cursor theme
+    
     # git TUI
     lazygit # simple TUI for git
 
@@ -144,7 +149,8 @@
     nil # nix lsp server
     jdt-language-server # java lsp server
     luajit # lua jit compiler
-    luajitPackages.luarocks # lua package manager
+    #luajitPackages.luarocks # lua package manager
+    lua-language-server # current lsp server in used
     nodejs_20 # javascript runtime engine 
     nodePackages.pyright # python package
     

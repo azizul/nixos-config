@@ -1992,8 +1992,7 @@
 	 :config
 	 (setq rust-format-on-save t))
      #+end_src
-
-     
+          
 **** Python
      #+begin_src emacs-lisp
        ;; install python + lsp
@@ -2009,6 +2008,8 @@
      For nixos we'll install via the =luajit= packages, called =luajitPackages.luarock=. Then
      we could run the following at the shell
 
+     Seems to have problem with nix-store, trying with the current =lua-language-server= lsp server
+     used in all ide.
      #+begin_src sh :results output :tangle no
        luarocks install --server=http://luarocks.org/dev lua-lsp --local
      #+end_src
