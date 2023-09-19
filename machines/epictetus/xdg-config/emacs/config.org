@@ -564,12 +564,14 @@
       (defhydra hydra-lsp (:exit t :hint nil)
 	"
       [lsp-mode commands] 
-   
+
        Buffer^^               Server^^                   Symbol
       -------------------------------------------------------------------------------------
        _f_: format           _M-r_: restart            _d_: declaration  _i_: implementation  _o_: documentation
        _m_: imenu            _S_  : shutdown           _D_: definition   _t_: type            _r_: rename
-       _x_: execute action   _M-s_: describe session   _R_: references   _s_: signature"
+       _x_: execute action   _M-s_: describe session   _R_: references   _s_: signature
+       _e_: errors
+	"
 	("d" lsp-find-declaration)
 	("D" lsp-ui-peek-find-definitions)
 	("R" lsp-ui-peek-find-references)
@@ -582,6 +584,7 @@
 	("f" lsp-format-buffer)
 	("m" lsp-ui-imenu)
 	("x" lsp-execute-code-action)
+	("e" lsp-treemacs-errors-list)
 
 	("M-s" lsp-describe-session)
 	("M-r" lsp-restart-workspace)
@@ -1975,7 +1978,7 @@
 	 (use-package zig-mode
 	   :hook (zig-mode . lsp))
        #+end_src
-
+       
 **** Rust
      Depends on the tree-sitter for syntax highlighting and LSP for advanced options.
 
@@ -1989,3 +1992,5 @@
 	 :config
 	 (setq rust-format-on-save t))
      #+end_src
+     
+**** Python
