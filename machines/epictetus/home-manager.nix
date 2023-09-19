@@ -26,7 +26,8 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # fonts?
-    (nerdfonts.override { fonts = ["JetBrainsMono" "FantasqueSansMono" "FiraCode" "DroidSansMono" "Iosevka" ]; })
+    (nerdfonts.override { fonts = ["JetBrainsMono" "FantasqueSansMono"
+                                   "FiraCode" "DroidSansMono" "Iosevka" ]; })
     comfortaa
     inter
     dotcolon-fonts
@@ -115,7 +116,7 @@
     # FIXME clash with gcc ld
     #clang # C language frontend for LLVM
     sqlite # SQL db engine
-    python3
+    python311
     sbcl
     zig
     zls
@@ -142,6 +143,10 @@
     elixir-ls # lsp for elixir
     nil # nix lsp server
     jdt-language-server # java lsp server
+    luajit # lua jit compiler
+    luajitPackages.luarocks # lua package manager
+    nodejs_20 # javascript runtime engine 
+    nodePackages.pyright # python package
     
     # internet browsing
     firefox

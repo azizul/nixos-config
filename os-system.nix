@@ -2,11 +2,9 @@
   lib,
   inputs,
   system,
-  config,
   pkgs,
 
   username,
-  fullname,
   nixos-version,
   
   ...
@@ -51,7 +49,7 @@
     shell = pkgs.zsh;
     description = "${username}";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = [];
   };
   
   # Allow unfree packages

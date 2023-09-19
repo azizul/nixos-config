@@ -1992,5 +1992,30 @@
 	 :config
 	 (setq rust-format-on-save t))
      #+end_src
+
      
 **** Python
+     #+begin_src emacs-lisp
+       ;; install python + lsp
+       (use-package python-mode)
+       (use-package lsp-pyright
+	 :ensure t
+	 :hook (python-mode . (lambda ()
+				(require 'lsp-pyright)
+				(lsp))))  ; or lsp-deferred
+     #+end_src
+     
+**** Lua
+     For nixos we'll install via the =luajit= packages, called =luajitPackages.luarock=. Then
+     we could run the following at the shell
+
+     #+begin_src sh :results output :tangle no
+       luarocks install --server=http://luarocks.org/dev lua-lsp --local
+     #+end_src
+
+     Add the major mode plus the lsp hook
+     #+begin_src emacs-lisp
+       ;; install lua
+       (use-package lua-mode
+	 :hook (lua-mode . lsp))
+     #+end_src
