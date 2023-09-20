@@ -66,7 +66,7 @@
     cpufetch # fancy cpu architecture script
     starship # customizable prompt for any shell
     sox # simple rate audio converter
-    fzf # fuzzy finder written in Go
+    #fzf # fuzzy finder written in Go
     tldr # simplified man page
     outils # checksums programs
     gnupg # GNU pgp program
@@ -270,9 +270,16 @@
   # keychain program
   programs.keychain = {
     enable = true;
+    enableXsessionIntegration = true;
     enableZshIntegration = true;
     agents = [ "ssh" ];
     keys = [ "id_ed25519" ];
+  };
+
+  # enable fzf and integrate with zsh
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
   
   # enable zsh and extra configs
