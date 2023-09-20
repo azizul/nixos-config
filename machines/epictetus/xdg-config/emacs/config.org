@@ -1895,15 +1895,6 @@
 
 *** TODO lsp-mode debug extension
 *** Language
-**** Nix (system builder)
-     #+begin_src emacs-lisp
-       ;; install the major mode
-       (use-package nix-mode
-	 :mode "\\.nix\\'"
-	 :hook ((nix-mode . lsp)))
-
-     #+end_src
-
 **** Common Lisp
 ***** SLY
 
@@ -2020,3 +2011,20 @@
        (use-package lua-mode
 	 :hook (lua-mode . lsp))
      #+end_src
+**** Nix (system builder)
+     Using with lsp doesn't seem to coresspond to what nix interpreter sees; so better to disable it.
+     #+begin_src emacs-lisp :tangle no
+       ;; install the major mode
+       (use-package nix-mode
+	 :mode "\\.nix\\'"
+	 :hook ((nix-mode . lsp)))
+
+     #+end_src
+
+     We'll use the default nix-mode only for the syntax highlight
+     #+begin_src emacs-lisp
+       ;; nix-mode only
+       (use-package nix-mode
+	 :mode "\\.nix\\'")
+     #+end_src
+     
